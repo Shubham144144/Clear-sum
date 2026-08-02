@@ -136,3 +136,77 @@ function calcExtraPaymentSavings(principal, annualRatePct, years, extraMonthly) 
     interestSaved: Math.max(0, interestSaved),
   };
 }
+
+/* ============================================
+   Savings growth (compound interest with
+   regular monthly contributions)
+   ============================================ */
+function calcSavingsGrowth(initial, monthlyContribution, annualRatePct, years) {
+  const monthlyRate = annualRatePct / 100 / 12;
+  const months = years * 12;
+
+  let balance = initial;
+  let totalContributed = initial;
+
+  for (let m = 0; m < months; m++) {
+    balance += monthlyContribution;
+    totalContributed += monthlyContribution;
+    balance *= 1 + monthlyRate;
+  }
+
+  const totalGrowth = balance - totalContributed;
+
+  return { futureValue: balance, totalContributed, totalGrowth };
+}
+
+/* ============================================
+   Take-home pay — simplified progressive
+   tax bands per country. These are approximate
+   estimates for illustration, not exact tax
+   advice (state/local taxes, NI thresholds,
+   cess, etc. vary and are not modeled).
+   ============================================ */
+const TAX_BANDS = {
+  US: [
+    { upTo: 11600, rate: 0.10 },
+    { upTo: 47150, rate: 0.12 },
+    { upTo: 100525, rate: 0.22 },
+    { upTo: 191950, rate: 0.24 },
+    { upTo: Infinity, rate: 0.32 },
+  ],
+  GB: [
+    { upTo: 12570, rate: 0 },
+    { upTo: 50270, rate: 0.20 },
+    { upTo: 125140, rate: 0.40 },
+    { upTo: Infinity, rate: 0.45 },
+  ],
+  IN: [
+    { upTo: 300000, rate: 0 },
+    { upTo: 600000, rate: 0.05 },
+    { upTo: 900000, rate: 0.10 },
+    { upTo: 1200000, rate: 0.15 },
+    { upTo: 1500000, rate: 0.20 },
+    { upTo: Infinity, rate: 0.30 },
+  ],
+};
+
+function calcTax(grossAnnual, countryCode) {
+  const bands = TAX_BANDS[countryCode];
+  let tax = 0;
+  let lower = 0;
+
+  for (const band of bands) {
+    if (grossAnnual > lower) {
+      const taxableInBand = Math.min(grossAnnual, band.upTo) - lower;
+      tax += taxableInBand * band.rate;
+      lower = band.upTo;
+    } else {
+      break;
+    }
+  }
+
+  const netAnnual = grossAnnual - tax;
+  const effectiveRate = grossAnnual > 0 ? (tax / grossAnnual) * 100 : 0;
+
+  return { tax, netAnnual, effectiveRate };
+}
