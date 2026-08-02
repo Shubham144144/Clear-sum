@@ -133,7 +133,7 @@
           </label>
           <input type="range" id="initial-amount" min="0" max="50000" step="500" value="1000">
           <div class="manual-input-row">
-            <input type="number" id="initial-amount-manual" value="1000" aria-label="Enter exact starting amount">
+            <input type="number" inputmode="decimal" enterkeyhint="done" id="initial-amount-manual" value="1000" aria-label="Enter exact starting amount">
           </div>
         </div>
 
@@ -144,7 +144,7 @@
           </label>
           <input type="range" id="monthly-contribution" min="0" max="3000" step="25" value="200">
           <div class="manual-input-row">
-            <input type="number" id="monthly-contribution-manual" value="200" aria-label="Enter exact monthly contribution">
+            <input type="number" inputmode="decimal" enterkeyhint="done" id="monthly-contribution-manual" value="200" aria-label="Enter exact monthly contribution">
           </div>
         </div>
 
@@ -155,7 +155,7 @@
           </label>
           <input type="range" id="savings-rate" min="0" max="15" step="0.1" value="7">
           <div class="manual-input-row">
-            <input type="number" id="savings-rate-manual" value="7" step="0.1" aria-label="Enter exact expected annual return">
+            <input type="number" inputmode="decimal" enterkeyhint="done" id="savings-rate-manual" value="7" step="0.1" aria-label="Enter exact expected annual return">
           </div>
         </div>
 
@@ -166,7 +166,7 @@
           </label>
           <input type="range" id="savings-years" min="1" max="40" step="1" value="10">
           <div class="manual-input-row">
-            <input type="number" id="savings-years-manual" value="10" aria-label="Enter exact time horizon in years">
+            <input type="number" inputmode="decimal" enterkeyhint="done" id="savings-years-manual" value="10" aria-label="Enter exact time horizon in years">
           </div>
         </div>
       </div>
@@ -202,7 +202,7 @@
             </label>
             <input type="range" id="extra-contribution" min="0" max="1000" step="25" value="0">
             <div class="manual-input-row on-dark">
-              <input type="number" id="extra-contribution-manual" value="0" aria-label="Enter exact extra monthly contribution">
+              <input type="number" inputmode="decimal" enterkeyhint="done" id="extra-contribution-manual" value="0" aria-label="Enter exact extra monthly contribution">
             </div>
           </div>
           <p class="whatif-result" id="whatif-result" style="color: rgba(245,246,243,0.85);"></p>

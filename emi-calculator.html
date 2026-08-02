@@ -138,7 +138,7 @@
           </label>
           <input type="range" id="loan-amount" min="1000" max="200000" step="500" value="25000">
           <div class="manual-input-row">
-            <input type="number" id="loan-amount-manual" value="25000" aria-label="Enter exact loan amount">
+            <input type="number" inputmode="decimal" enterkeyhint="done" id="loan-amount-manual" value="25000" aria-label="Enter exact loan amount">
           </div>
         </div>
 
@@ -149,7 +149,7 @@
           </label>
           <input type="range" id="loan-rate" min="0" max="20" step="0.1" value="6.5">
           <div class="manual-input-row">
-            <input type="number" id="loan-rate-manual" value="6.5" step="0.1" aria-label="Enter exact interest rate">
+            <input type="number" inputmode="decimal" enterkeyhint="done" id="loan-rate-manual" value="6.5" step="0.1" aria-label="Enter exact interest rate">
           </div>
         </div>
 
@@ -160,7 +160,7 @@
           </label>
           <input type="range" id="loan-years" min="1" max="30" step="1" value="5">
           <div class="manual-input-row">
-            <input type="number" id="loan-years-manual" value="5" aria-label="Enter exact loan term in years">
+            <input type="number" inputmode="decimal" enterkeyhint="done" id="loan-years-manual" value="5" aria-label="Enter exact loan term in years">
           </div>
         </div>
       </div>
@@ -196,7 +196,7 @@
             </label>
             <input type="range" id="extra-payment" min="0" max="1000" step="10" value="0">
             <div class="manual-input-row on-dark">
-              <input type="number" id="extra-payment-manual" value="0" aria-label="Enter exact extra monthly payment">
+              <input type="number" inputmode="decimal" enterkeyhint="done" id="extra-payment-manual" value="0" aria-label="Enter exact extra monthly payment">
             </div>
           </div>
           <p class="whatif-result" id="whatif-result" style="color: rgba(245,246,243,0.85);"></p>
