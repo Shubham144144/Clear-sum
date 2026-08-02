@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="StGlqqepfkXty6FmWiPjf-_EkamMKfhvoo7njRvF3Ug" />
+<title id="page-title">Take-Home Pay Calculator — See What You Actually Keep</title>
+<meta name="description" content="Estimate your take-home pay after tax. See your net monthly income and effective tax rate instantly, adjusted for your country.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is take-home pay estimated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Take-home pay is estimated by applying progressive tax bands to gross income, where each portion of income is taxed at the rate for its bracket, then subtracting the total tax from gross pay."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why might my actual paycheck differ from this estimate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This estimate models national income tax bands only. Actual pay can differ due to state or local taxes, social security or national insurance contributions, pension deductions, and individual tax credits, which are not included here."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Clear<em>Sum</em></a>
+    <div class="country-stamp">
+      <select id="country-select" aria-label="Select your country">
+        <option value="US">United States</option>
+        <option value="GB">United Kingdom</option>
+        <option value="IN">India</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Take-home pay calculator</p>
+      <h1>What actually lands in your account?</h1>
+      <p>Enter your gross salary — see an estimate of your take-home pay after income tax.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="wrap">
+
+      <div class="input-card">
+        <div class="field" style="margin-bottom: 0;">
+          <label for="gross-salary">
+            <span>Gross annual salary</span>
+            <span class="field-value" id="gross-salary-display">$60,000</span>
+          </label>
+          <input type="range" id="gross-salary" min="0" max="300000" step="1000" value="60000">
+        </div>
+      </div>
+
+      <div class="receipt">
+        <p class="receipt-headline">Estimated Take-Home Pay</p>
+        <p class="receipt-amount" id="receipt-amount">$0/mo</p>
+
+        <div class="stack-bar">
+          <div class="seg-principal" id="seg-net" style="width: 60%"></div>
+          <div class="seg-interest" id="seg-tax" style="width: 40%"></div>
+        </div>
+        <div class="stack-legend">
+          <span class="leg-principal">You keep</span>
+          <span class="leg-interest">Income tax</span>
+        </div>
+
+        <div class="receipt-row">
+          <span class="rlabel">Gross annual</span>
+          <span class="rval" id="gross-annual">$0</span>
+        </div>
+        <div class="receipt-row">
+          <span class="rlabel">Estimated annual tax</span>
+          <span class="rval" id="annual-tax">$0</span>
+        </div>
+        <div class="receipt-row">
+          <span class="rlabel">Net annual</span>
+          <span class="rval" id="net-annual">$0</span>
+        </div>
+        <div class="receipt-row">
+          <span class="rlabel">Effective tax rate</span>
+          <span class="rval" id="effective-rate">0%</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div style="padding-bottom: 48px;">
+      <h2 style="font-family: var(--font-display); font-size: 22px;">How this is calculated</h2>
+      <p style="color: var(--ink-light); font-size: 14px; max-width: 60ch;">
+        This estimate applies progressive national income tax bands — each portion of your income is taxed at its own bracket's rate, so your effective rate is always lower than your top bracket.
+      </p>
+      <p style="color: var(--ink-light); font-size: 14px; max-width: 60ch;">
+        This models national income tax only. It does not include state or local tax, social security/National Insurance/EPF contributions, pension deductions, or personal credits and allowances — your actual paycheck will differ. Use this as a directional estimate, not an exact figure.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>ClearSum provides general estimates for informational purposes only and is not financial or tax advice. · <a href="privacy-policy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p>
+  </div>
+</footer>
+
+<script src="assets/js/calculator.js"></script>
+<script>
+  let currentCountry = "US";
+
+  const salaryEl = document.getElementById("gross-salary");
+
+  function render() {
+    const gross = Number(salaryEl.value);
+
+    document.getElementById("gross-salary-display").textContent = formatMoney(gross, currentCountry);
+
+    const { tax, netAnnual, effectiveRate } = calcTax(gross, currentCountry);
+
+    document.getElementById("receipt-amount").textContent = formatMoney(netAnnual / 12, currentCountry) + "/mo";
+    document.getElementById("gross-annual").textContent = formatMoney(gross, currentCountry);
+    document.getElementById("annual-tax").textContent = formatMoney(tax, currentCountry);
+    document.getElementById("net-annual").textContent = formatMoney(netAnnual, currentCountry);
+    document.getElementById("effective-rate").textContent = effectiveRate.toFixed(1) + "%";
+
+    const netPct = gross > 0 ? (netAnnual / gross) * 100 : 100;
+    const taxPct = 100 - netPct;
+    document.getElementById("seg-net").style.width = netPct.toFixed(1) + "%";
+    document.getElementById("seg-tax").style.width = taxPct.toFixed(1) + "%";
+  }
+
+  function onCountryChange(code) {
+    currentCountry = code;
+
+    salaryEl.max = code === "IN" ? 10000000 : 300000;
+    salaryEl.step = code === "IN" ? 10000 : 1000;
+    salaryEl.value = code === "IN" ? 800000 : 60000;
+
+    render();
+  }
+
+  initCountrySelector(onCountryChange);
+  salaryEl.addEventListener("input", render);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="StGlqqepfkXty6FmWiPjf-_EkamMKfhvoo7njRvF3Ug" />
+<title id="page-title">Savings Growth Calculator — See Your Money Compound</title>
+<meta name="description" content="Calculate how your savings grow over time with compound interest and monthly contributions. See exactly how much is your money vs. growth.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does compound interest grow savings?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Compound interest grows savings because each period's interest is calculated on the growing balance, including previously earned interest, so growth accelerates the longer money stays invested."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does contributing monthly make a big difference?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Regular monthly contributions add new principal that also compounds over time, so even small consistent amounts can outgrow a single larger deposit made later."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Clear<em>Sum</em></a>
+    <div class="country-stamp">
+      <select id="country-select" aria-label="Select your country">
+        <option value="US">United States</option>
+        <option value="GB">United Kingdom</option>
+        <option value="IN">India</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Savings calculator</p>
+      <h1>Watch your savings compound over time.</h1>
+      <p>Adjust your starting amount, monthly contribution and return rate — see how much is your own money versus growth.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="wrap">
+
+      <div class="input-card">
+        <div class="field">
+          <label for="initial-amount">
+            <span>Starting amount</span>
+            <span class="field-value" id="initial-amount-display">$1,000</span>
+          </label>
+          <input type="range" id="initial-amount" min="0" max="50000" step="500" value="1000">
+        </div>
+
+        <div class="field">
+          <label for="monthly-contribution">
+            <span>Monthly contribution</span>
+            <span class="field-value" id="monthly-contribution-display">$200</span>
+          </label>
+          <input type="range" id="monthly-contribution" min="0" max="3000" step="25" value="200">
+        </div>
+
+        <div class="field">
+          <label for="savings-rate">
+            <span>Expected annual return</span>
+            <span class="field-value" id="savings-rate-display">7%</span>
+          </label>
+          <input type="range" id="savings-rate" min="0" max="15" step="0.1" value="7">
+        </div>
+
+        <div class="field">
+          <label for="savings-years">
+            <span>Time horizon</span>
+            <span class="field-value" id="savings-years-display">10 years</span>
+          </label>
+          <input type="range" id="savings-years" min="1" max="40" step="1" value="10">
+        </div>
+      </div>
+
+      <div class="receipt">
+        <p class="receipt-headline">Future Value</p>
+        <p class="receipt-amount" id="receipt-amount">$0</p>
+
+        <div class="stack-bar">
+          <div class="seg-principal" id="seg-contributed" style="width: 60%"></div>
+          <div class="seg-interest" id="seg-growth" style="width: 40%"></div>
+        </div>
+        <div class="stack-legend">
+          <span class="leg-principal">Your contributions</span>
+          <span class="leg-interest">Growth earned</span>
+        </div>
+
+        <div class="receipt-row">
+          <span class="rlabel">Total contributed</span>
+          <span class="rval" id="total-contributed">$0</span>
+        </div>
+        <div class="receipt-row">
+          <span class="rlabel">Growth earned</span>
+          <span class="rval" id="total-growth">$0</span>
+        </div>
+
+        <div class="whatif">
+          <p class="whatif-label">What if you contributed more each month?</p>
+          <div class="field" style="margin-bottom: 0;">
+            <label for="extra-contribution" style="color: rgba(245,246,243,0.65);">
+              <span>Extra monthly contribution</span>
+              <span class="field-value" id="extra-contribution-display" style="color: var(--paper);">$0</span>
+            </label>
+            <input type="range" id="extra-contribution" min="0" max="1000" step="25" value="0">
+          </div>
+          <p class="whatif-result" id="whatif-result" style="color: rgba(245,246,243,0.85);"></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div style="padding-bottom: 48px;">
+      <h2 style="font-family: var(--font-display); font-size: 22px;">How this is calculated</h2>
+      <p style="color: var(--ink-light); font-size: 14px; max-width: 60ch;">
+        Each month, your contribution is added to the balance, and the whole balance then grows by your expected monthly return. Over many months this compounding effect means growth builds on growth — later years typically add far more than early ones, even with the same contribution.
+      </p>
+      <p style="color: var(--ink-light); font-size: 14px; max-width: 60ch;">
+        Actual returns vary and are never guaranteed — this calculator assumes a constant rate for simplicity, while real markets fluctuate year to year.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>ClearSum provides general estimates for informational purposes only and is not financial advice. · <a href="privacy-policy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p>
+  </div>
+</footer>
+
+<script src="assets/js/calculator.js"></script>
+<script>
+  let currentCountry = "US";
+
+  const initialEl = document.getElementById("initial-amount");
+  const contribEl = document.getElementById("monthly-contribution");
+  const rateEl = document.getElementById("savings-rate");
+  const yearsEl = document.getElementById("savings-years");
+  const extraEl = document.getElementById("extra-contribution");
+
+  function render() {
+    const initial = Number(initialEl.value);
+    const contrib = Number(contribEl.value);
+    const rate = Number(rateEl.value);
+    const years = Number(yearsEl.value);
+    const extra = Number(extraEl.value);
+
+    document.getElementById("initial-amount-display").textContent = formatMoney(initial, currentCountry);
+    document.getElementById("monthly-contribution-display").textContent = formatMoney(contrib, currentCountry);
+    document.getElementById("savings-rate-display").textContent = rate.toFixed(1) + "%";
+    document.getElementById("savings-years-display").textContent = years + (years === 1 ? " year" : " years");
+    document.getElementById("extra-contribution-display").textContent = formatMoney(extra, currentCountry);
+
+    const { futureValue, totalContributed, totalGrowth } = calcSavingsGrowth(initial, contrib, rate, years);
+
+    document.getElementById("receipt-amount").textContent = formatMoney(futureValue, currentCountry);
+    document.getElementById("total-contributed").textContent = formatMoney(totalContributed, currentCountry);
+    document.getElementById("total-growth").textContent = formatMoney(totalGrowth, currentCountry);
+
+    const contribPct = (totalContributed / futureValue) * 100;
+    const growthPct = 100 - contribPct;
+    document.getElementById("seg-contributed").style.width = contribPct.toFixed(1) + "%";
+    document.getElementById("seg-growth").style.width = growthPct.toFixed(1) + "%";
+
+    const whatifResult = document.getElementById("whatif-result");
+    if (extra > 0) {
+      const withExtra = calcSavingsGrowth(initial, contrib + extra, rate, years);
+      const diff = withExtra.futureValue - futureValue;
+      whatifResult.innerHTML = "That extra contribution grows into <strong>" + formatMoney(diff, currentCountry) + " more</strong> by the end of your time horizon.";
+    } else {
+      whatifResult.textContent = "";
+    }
+  }
+
+  function onCountryChange(code) {
+    currentCountry = code;
+    const c = COUNTRIES[code];
+
+    initialEl.max = code === "IN" ? 4000000 : 50000;
+    initialEl.step = code === "IN" ? 25000 : 500;
+    initialEl.value = code === "IN" ? 80000 : 1000;
+
+    contribEl.max = code === "IN" ? 150000 : 3000;
+    contribEl.step = code === "IN" ? 1000 : 25;
+    contribEl.value = code === "IN" ? 15000 : 200;
+
+    extraEl.max = code === "IN" ? 50000 : 1000;
+    extraEl.value = 0;
+
+    render();
+  }
+
+  initCountrySelector(onCountryChange);
+
+  [initialEl, contribEl, rateEl, yearsEl, extraEl].forEach(function (el) {
+    el.addEventListener("input", render);
+  });
+</script>
+
+</body>
+</html>
