@@ -4,37 +4,97 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="StGlqqepfkXty6FmWiPjf-_EkamMKfhvoo7njRvF3Ug" />
+<meta name="robots" content="index, follow">
 <title id="page-title">Take-Home Pay Calculator — See What You Actually Keep</title>
-<meta name="description" content="Estimate your take-home pay after tax. See your net monthly income and effective tax rate instantly, adjusted for your country.">
+<meta name="description" content="Free take-home pay calculator with a full tax bracket breakdown. Estimate your net income and effective tax rate — for US, UK and India.">
+<link rel="canonical" href="https://shubham144144.github.io/Clear-sum/take-home-pay-calculator.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Take-Home Pay Calculator — See What You Actually Keep">
+<meta property="og:description" content="Estimate your net monthly income and effective tax rate with a full bracket-by-bracket breakdown — instant, no sign-up.">
+<meta property="og:url" content="https://shubham144144.github.io/Clear-sum/take-home-pay-calculator.html">
+<meta property="og:site_name" content="ClearSum">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Take-Home Pay Calculator — See What You Actually Keep">
+<meta name="twitter:description" content="Estimate your net monthly income and effective tax rate with a full bracket-by-bracket breakdown — instant, no sign-up.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@graph": [
     {
-      "@type": "Question",
-      "name": "How is take-home pay estimated?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Take-home pay is estimated by applying progressive tax bands to gross income, where each portion of income is taxed at the rate for its bracket, then subtracting the total tax from gross pay."
-      }
+      "@type": "WebSite",
+      "@id": "https://shubham144144.github.io/Clear-sum/#website",
+      "url": "https://shubham144144.github.io/Clear-sum/",
+      "name": "ClearSum",
+      "publisher": { "@id": "https://shubham144144.github.io/Clear-sum/#organization" }
     },
     {
-      "@type": "Question",
-      "name": "Why might my actual paycheck differ from this estimate?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "This estimate models national income tax bands only. Actual pay can differ due to state or local taxes, social security or national insurance contributions, pension deductions, and individual tax credits, which are not included here."
-      }
+      "@type": "Organization",
+      "@id": "https://shubham144144.github.io/Clear-sum/#organization",
+      "name": "ClearSum",
+      "url": "https://shubham144144.github.io/Clear-sum/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shubham144144.github.io/Clear-sum/" },
+        { "@type": "ListItem", "position": 2, "name": "Take-Home Pay Calculator", "item": "https://shubham144144.github.io/Clear-sum/take-home-pay-calculator.html" }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Take-Home Pay Calculator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any (web-based)",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "url": "https://shubham144144.github.io/Clear-sum/take-home-pay-calculator.html"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://shubham144144.github.io/Clear-sum/take-home-pay-calculator.html#webpage",
+      "url": "https://shubham144144.github.io/Clear-sum/take-home-pay-calculator.html",
+      "name": "Take-Home Pay Calculator — See What You Actually Keep",
+      "isPartOf": { "@id": "https://shubham144144.github.io/Clear-sum/#website" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is take-home pay estimated?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Take-home pay is estimated by applying progressive tax bands to gross income, where each portion of income is taxed at the rate for its bracket, then subtracting the total tax from gross pay." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why might my actual paycheck differ from this estimate?",
+          "acceptedAnswer": { "@type": "Answer", "text": "This estimate models national income tax bands only. Actual pay can differ due to state or local taxes, social security or national insurance contributions, pension deductions, and individual tax credits, which are not included here." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is my effective tax rate lower than my top bracket?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Progressive tax systems only apply the top bracket's rate to income above that threshold, not to the entire income, so the effective (average) rate is always lower than the highest bracket reached." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does this include social security or national insurance?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. This calculator models national income tax bands only and does not include social security, National Insurance, EPF, or similar payroll deductions, which would further reduce actual take-home pay." }
+        }
+      ]
     }
   ]
 }
 </script>
 </head>
 <body>
+
+<div class="reading-progress" id="reading-progress"></div>
 
 <header class="site-header">
   <div class="wrap">
@@ -49,12 +109,16 @@
   </div>
 </header>
 
+<nav class="wrap breadcrumb" aria-label="Breadcrumb">
+  <a href="index.html">Home</a><span class="sep">/</span><span>Take-Home Pay Calculator</span>
+</nav>
+
 <main>
   <section class="hero">
     <div class="wrap">
       <p class="eyebrow">Take-home pay calculator</p>
       <h1>What actually lands in your account?</h1>
-      <p>Enter your gross salary — see an estimate of your take-home pay after income tax.</p>
+      <p>Enter your gross salary — see an estimate of your take-home pay after income tax, with a full bracket-by-bracket breakdown.</p>
     </div>
   </section>
 
@@ -102,18 +166,107 @@
         </div>
       </div>
 
+      <div class="action-row">
+        <button class="action-btn" id="btn-print" type="button">Print results</button>
+        <button class="action-btn" id="btn-copy" type="button">Copy results</button>
+        <button class="action-btn" id="btn-reset" type="button">Reset</button>
+      </div>
+
+      <div class="amort-toggle">
+        <button class="action-btn" id="btn-amort-toggle" type="button" aria-expanded="false" aria-controls="amort-table-wrap">Show bracket breakdown</button>
+        <div class="amort-table-wrap" id="amort-table-wrap">
+          <table class="amort-table" aria-label="Tax bracket breakdown">
+            <thead>
+              <tr><th>Bracket</th><th>Rate</th><th>Taxed in bracket</th><th>Tax owed</th></tr>
+            </thead>
+            <tbody id="amort-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
     </div>
   </section>
 
-  <section class="wrap">
-    <div style="padding-bottom: 48px;">
-      <h2 style="font-family: var(--font-display); font-size: 22px;">How this is calculated</h2>
-      <p style="color: var(--ink-light); font-size: 14px; max-width: 60ch;">
-        This estimate applies progressive national income tax bands — each portion of your income is taxed at its own bracket's rate, so your effective rate is always lower than your top bracket.
-      </p>
-      <p style="color: var(--ink-light); font-size: 14px; max-width: 60ch;">
-        This models national income tax only. It does not include state or local tax, social security/National Insurance/EPF contributions, pension deductions, or personal credits and allowances — your actual paycheck will differ. Use this as a directional estimate, not an exact figure.
-      </p>
+  <section class="wrap article-content">
+    <h2>What this calculator does</h2>
+    <p>This tool estimates your take-home pay by applying progressive national income tax bands to your gross annual salary. It shows both the total tax and, in the bracket breakdown, exactly how much of your income falls into each tax band and what's owed at each rate.</p>
+
+    <h2>How the calculation works</h2>
+    <p>Progressive tax systems don't apply one flat rate to your entire salary. Instead, your income is split into brackets, and each bracket is taxed at its own rate — only the portion of income that falls within a bracket is taxed at that bracket's rate. This is why your effective (average) tax rate is always lower than your top bracket's rate.</p>
+
+    <h3>Worked example</h3>
+    <p id="worked-example">On a $60,000 gross salary in the US, the first portion is taxed at 10%, the next portion at 12%, and so on up through whichever bracket your income reaches — resulting in a total estimated tax and an effective rate that's noticeably lower than the top bracket touched.</p>
+
+    <h2>Practical use cases</h2>
+    <ul>
+      <li>Comparing take-home pay across two job offers with different gross salaries</li>
+      <li>Understanding how a raise affects your net pay, not just your gross figure</li>
+      <li>Getting a quick estimate before a detailed payroll calculation</li>
+      <li>Seeing how much of a salary increase is actually kept versus taxed away</li>
+    </ul>
+
+    <h2>Advantages of checking this before negotiating</h2>
+    <p>A salary offer is often discussed in gross terms, but what actually matters day-to-day is net pay. Knowing your effective tax rate in advance means you can evaluate a raise or offer in terms of what you'll actually receive, not just the headline number.</p>
+
+    <h2>Limitations to keep in mind</h2>
+    <p>This estimate covers national income tax bands only. It does not include state or local taxes, Social Security, National Insurance, EPF or similar payroll contributions, pension deductions, or personal tax credits and allowances — all of which affect your real paycheck. Treat this as a directional estimate, not a substitute for a payroll calculation or tax advisor.</p>
+
+    <h2>Common mistakes people make</h2>
+    <ul>
+      <li>Assuming their top tax bracket applies to their entire salary, rather than just the portion above that threshold</li>
+      <li>Comparing gross salary offers without accounting for how tax brackets differ between two roles or locations</li>
+      <li>Forgetting that payroll deductions beyond income tax (like Social Security or NI) further reduce actual take-home pay</li>
+      <li>Not re-checking the estimate after a raise pushes income into a new bracket</li>
+    </ul>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <h3>How is take-home pay estimated?</h3>
+      <p>By applying progressive tax bands to gross income, taxing each portion at its bracket's rate, then subtracting the total from gross pay.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Why might my actual paycheck differ from this estimate?</h3>
+      <p>This models national income tax only — state/local tax, Social Security, NI, EPF and personal credits aren't included, so real pay will differ.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Why is my effective tax rate lower than my top bracket?</h3>
+      <p>Only the income above each threshold is taxed at that bracket's rate, so your blended average rate is always below your top bracket.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Does this include Social Security or National Insurance?</h3>
+      <p>No — this covers national income tax bands only; payroll contributions like these would reduce take-home pay further.</p>
+    </div>
+
+    <h2>A few practical tips</h2>
+    <ul>
+      <li>Always compare net pay, not gross salary, when evaluating two offers</li>
+      <li>Check whether a raise pushes any portion of your income into a new bracket before assuming the full amount is "extra" take-home</li>
+      <li>Use this as a starting estimate, then confirm exact figures with a payroll calculator or tax professional</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>The gap between your gross salary and what you actually take home can be larger than expected — and it's driven by exactly which brackets your income touches. Use the breakdown above to see precisely where that gap comes from.</p>
+
+    <div class="meta-bar">
+      <span>Last updated: <span id="last-updated-date"></span></span>
+      <span>Methodology: progressive tax bracket estimate</span>
+      <a href="disclaimer.html">Disclaimer</a>
+    </div>
+  </section>
+
+  <section class="wrap related-tools">
+    <h2>Related calculators</h2>
+    <div class="related-grid">
+      <a class="tool-card" href="emi-calculator.html">
+        <p class="tool-name">Loan Payment Calculator</p>
+        <p class="tool-desc">See your exact monthly loan payment and total interest.</p>
+      </a>
+      <a class="tool-card" href="savings-calculator.html">
+        <p class="tool-name">Savings Growth Calculator</p>
+        <p class="tool-desc">See how a monthly contribution compounds over time.</p>
+      </a>
     </div>
   </section>
 </main>
@@ -124,11 +277,29 @@
   </div>
 </footer>
 
+<button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top">&uarr;</button>
+
 <script src="assets/js/calculator.js"></script>
 <script>
   let currentCountry = "US";
 
   const salaryEl = document.getElementById("gross-salary");
+
+  function renderTable(gross) {
+    const rows = calcTaxBracketBreakdown(gross, currentCountry);
+    const tbody = document.getElementById("amort-tbody");
+    tbody.innerHTML = "";
+    rows.forEach(function (row) {
+      const highLabel = row.rangeHigh === Infinity ? "+" : formatMoney(row.rangeHigh, currentCountry);
+      const tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>" + formatMoney(row.rangeLow, currentCountry) + "&ndash;" + highLabel + "</td>" +
+        "<td>" + row.rate.toFixed(0) + "%</td>" +
+        "<td>" + formatMoney(row.taxableInBand, currentCountry) + "</td>" +
+        "<td>" + formatMoney(row.taxInBand, currentCountry) + "</td>";
+      tbody.appendChild(tr);
+    });
+  }
 
   function render() {
     const gross = Number(salaryEl.value);
@@ -147,6 +318,8 @@
     const taxPct = 100 - netPct;
     document.getElementById("seg-net").style.width = netPct.toFixed(1) + "%";
     document.getElementById("seg-tax").style.width = taxPct.toFixed(1) + "%";
+
+    renderTable(gross);
   }
 
   function onCountryChange(code) {
@@ -156,11 +329,55 @@
     salaryEl.step = code === "IN" ? 10000 : 1000;
     salaryEl.value = code === "IN" ? 800000 : 60000;
 
+    const gross = Number(salaryEl.value);
+    const { tax, effectiveRate } = calcTax(gross, code);
+    document.getElementById("worked-example").innerHTML =
+      "On a " + formatMoney(gross, code) + " gross salary" + (code === "US" ? " in the US" : code === "GB" ? " in the UK" : " in India") +
+      ", income is taxed band by band according to the applicable brackets — resulting in an estimated total tax of " +
+      formatMoney(tax, code) + " and an effective rate of " + effectiveRate.toFixed(1) + "%, noticeably lower than the top bracket touched.";
+
     render();
   }
 
   initCountrySelector(onCountryChange);
   salaryEl.addEventListener("input", render);
+
+  const amortBtn = document.getElementById("btn-amort-toggle");
+  const amortWrap = document.getElementById("amort-table-wrap");
+  amortBtn.addEventListener("click", function () {
+    const isOpen = amortWrap.classList.toggle("open");
+    amortBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    amortBtn.textContent = isOpen ? "Hide bracket breakdown" : "Show bracket breakdown";
+  });
+
+  document.getElementById("btn-print").addEventListener("click", function () {
+    window.print();
+  });
+
+  document.getElementById("btn-copy").addEventListener("click", function () {
+    const text =
+      "Take-home pay: " + document.getElementById("receipt-amount").textContent + "\n" +
+      "Annual tax: " + document.getElementById("annual-tax").textContent + "\n" +
+      "Net annual: " + document.getElementById("net-annual").textContent + "\n" +
+      "Effective rate: " + document.getElementById("effective-rate").textContent;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(function () {
+        const btn = document.getElementById("btn-copy");
+        const original = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(function () { btn.textContent = original; }, 1500);
+      });
+    }
+  });
+
+  document.getElementById("btn-reset").addEventListener("click", function () {
+    onCountryChange(currentCountry);
+  });
+
+  document.getElementById("last-updated-date").textContent = new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+
+  initReadingProgress();
+  initBackToTop();
 </script>
 
 </body>
