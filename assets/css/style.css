@@ -363,3 +363,227 @@ body {
   .hero h1 { font-size: 30px; }
   .receipt-amount { font-size: 32px; }
 }
+
+/* ---------- Reading progress bar ---------- */
+.reading-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: var(--brass);
+  width: 0%;
+  z-index: 100;
+  transition: width 0.1s linear;
+}
+
+/* ---------- Breadcrumb ---------- */
+.breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  color: var(--ink-light);
+  padding: 14px 0 0;
+}
+
+.breadcrumb a { color: var(--ink-light); }
+.breadcrumb a:hover { color: var(--brass-dark); }
+.breadcrumb .sep { margin: 0 6px; opacity: 0.5; }
+
+/* ---------- Action buttons row ---------- */
+.action-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 9px 14px;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.action-btn:hover,
+.action-btn:focus-visible {
+  border-color: var(--brass);
+  color: var(--brass-dark);
+}
+
+/* ---------- Amortization table ---------- */
+.amort-toggle {
+  margin-top: 20px;
+}
+
+.amort-table-wrap {
+  overflow-x: auto;
+  margin-top: 12px;
+  display: none;
+}
+
+.amort-table-wrap.open { display: block; }
+
+.amort-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  min-width: 480px;
+}
+
+.amort-table th {
+  text-align: right;
+  font-weight: 600;
+  color: var(--ink-light);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.amort-table th:first-child,
+.amort-table td:first-child { text-align: left; }
+
+.amort-table td {
+  text-align: right;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ---------- Article content ---------- */
+.article-content {
+  padding-bottom: 32px;
+}
+
+.article-content h2 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  margin: 36px 0 12px;
+}
+
+.article-content h3 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  margin: 24px 0 8px;
+}
+
+.article-content p {
+  color: var(--ink-light);
+  font-size: 14.5px;
+  max-width: 68ch;
+  margin: 0 0 14px;
+}
+
+.article-content ul,
+.article-content ol {
+  color: var(--ink-light);
+  font-size: 14.5px;
+  max-width: 68ch;
+  padding-left: 20px;
+  margin: 0 0 14px;
+}
+
+.article-content li { margin-bottom: 6px; }
+
+.example-box {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--brass);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin: 18px 0;
+  font-size: 14px;
+}
+
+.example-box strong { color: var(--ink); }
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+  padding: 16px 0;
+}
+
+.faq-item:last-child { border-bottom: none; }
+
+.faq-item h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.faq-item p { margin: 0; }
+
+/* ---------- Related tools ---------- */
+.related-tools {
+  padding: 8px 0 40px;
+}
+
+.related-tools h2 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  margin: 0 0 14px;
+}
+
+.related-grid {
+  display: grid;
+  gap: 10px;
+}
+
+/* ---------- Ad slot placeholder ---------- */
+.ad-slot {
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 14px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin: 24px 0;
+  background: rgba(0,0,0,0.02);
+}
+
+/* ---------- Meta bar (last updated / methodology) ---------- */
+.meta-bar {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-light);
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 24px 0;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Back to top ---------- */
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 90;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.back-to-top.visible { display: flex; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
