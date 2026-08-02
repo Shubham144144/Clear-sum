@@ -537,15 +537,16 @@ body {
 .ad-slot {
   border: 1px dashed var(--line);
   border-radius: var(--radius);
-  padding: 14px;
+  padding: 10px;
   text-align: center;
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.06em;
+  font-size: 9px;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--ink-light);
-  margin: 24px 0;
-  background: rgba(0,0,0,0.02);
+  color: var(--line);
+  margin: 32px 0;
+  background: transparent;
+  opacity: 0.6;
 }
 
 /* ---------- Meta bar (last updated / methodology) ---------- */
