@@ -4,37 +4,97 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="StGlqqepfkXty6FmWiPjf-_EkamMKfhvoo7njRvF3Ug" />
-<title id="page-title">Savings Growth Calculator — See Your Money Compound</title>
-<meta name="description" content="Calculate how your savings grow over time with compound interest and monthly contributions. See exactly how much is your money vs. growth.">
+<meta name="robots" content="index, follow">
+<title id="page-title">Savings Growth Calculator — See Your Money Compound Over Time</title>
+<meta name="description" content="Free savings calculator with a yearly growth breakdown. See how compound interest and monthly contributions grow your money — for US, UK and India.">
+<link rel="canonical" href="https://shubham144144.github.io/Clear-sum/savings-calculator.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Savings Growth Calculator — See Your Money Compound">
+<meta property="og:description" content="See how your savings grow with compound interest and monthly contributions — instant results, full yearly breakdown.">
+<meta property="og:url" content="https://shubham144144.github.io/Clear-sum/savings-calculator.html">
+<meta property="og:site_name" content="ClearSum">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Savings Growth Calculator — See Your Money Compound">
+<meta name="twitter:description" content="See how your savings grow with compound interest and monthly contributions — instant results, full yearly breakdown.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@graph": [
     {
-      "@type": "Question",
-      "name": "How does compound interest grow savings?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Compound interest grows savings because each period's interest is calculated on the growing balance, including previously earned interest, so growth accelerates the longer money stays invested."
-      }
+      "@type": "WebSite",
+      "@id": "https://shubham144144.github.io/Clear-sum/#website",
+      "url": "https://shubham144144.github.io/Clear-sum/",
+      "name": "ClearSum",
+      "publisher": { "@id": "https://shubham144144.github.io/Clear-sum/#organization" }
     },
     {
-      "@type": "Question",
-      "name": "Does contributing monthly make a big difference?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Regular monthly contributions add new principal that also compounds over time, so even small consistent amounts can outgrow a single larger deposit made later."
-      }
+      "@type": "Organization",
+      "@id": "https://shubham144144.github.io/Clear-sum/#organization",
+      "name": "ClearSum",
+      "url": "https://shubham144144.github.io/Clear-sum/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shubham144144.github.io/Clear-sum/" },
+        { "@type": "ListItem", "position": 2, "name": "Savings Growth Calculator", "item": "https://shubham144144.github.io/Clear-sum/savings-calculator.html" }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Savings Growth Calculator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any (web-based)",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "url": "https://shubham144144.github.io/Clear-sum/savings-calculator.html"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://shubham144144.github.io/Clear-sum/savings-calculator.html#webpage",
+      "url": "https://shubham144144.github.io/Clear-sum/savings-calculator.html",
+      "name": "Savings Growth Calculator — See Your Money Compound Over Time",
+      "isPartOf": { "@id": "https://shubham144144.github.io/Clear-sum/#website" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does compound interest grow savings?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Compound interest grows savings because each period's interest is calculated on the growing balance, including previously earned interest, so growth accelerates the longer money stays invested." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does contributing monthly make a big difference?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Regular monthly contributions add new principal that also compounds over time, so even small consistent amounts can outgrow a single larger deposit made later." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does growth accelerate in later years?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Because interest is earned on both the original contributions and all previously earned interest, the balance grows faster each year even without increasing the monthly contribution." }
+        },
+        {
+          "@type": "Question",
+          "name": "What return rate should I assume?",
+          "acceptedAnswer": { "@type": "Answer", "text": "This depends on where the money is held; savings accounts typically earn far less than diversified investments, so use a rate that matches the actual account or investment type you plan to use." }
+        }
+      ]
     }
   ]
 }
 </script>
 </head>
 <body>
+
+<div class="reading-progress" id="reading-progress"></div>
 
 <header class="site-header">
   <div class="wrap">
@@ -49,12 +109,16 @@
   </div>
 </header>
 
+<nav class="wrap breadcrumb" aria-label="Breadcrumb">
+  <a href="index.html">Home</a><span class="sep">/</span><span>Savings Growth Calculator</span>
+</nav>
+
 <main>
   <section class="hero">
     <div class="wrap">
       <p class="eyebrow">Savings calculator</p>
       <h1>Watch your savings compound over time.</h1>
-      <p>Adjust your starting amount, monthly contribution and return rate — see how much is your own money versus growth.</p>
+      <p>Adjust your starting amount, monthly contribution and return rate — see how much is your own money versus growth, with a full yearly breakdown.</p>
     </div>
   </section>
 
@@ -130,18 +194,107 @@
         </div>
       </div>
 
+      <div class="action-row">
+        <button class="action-btn" id="btn-print" type="button">Print results</button>
+        <button class="action-btn" id="btn-copy" type="button">Copy results</button>
+        <button class="action-btn" id="btn-reset" type="button">Reset</button>
+      </div>
+
+      <div class="amort-toggle">
+        <button class="action-btn" id="btn-amort-toggle" type="button" aria-expanded="false" aria-controls="amort-table-wrap">Show yearly breakdown</button>
+        <div class="amort-table-wrap" id="amort-table-wrap">
+          <table class="amort-table" aria-label="Yearly savings growth breakdown">
+            <thead>
+              <tr><th>Year</th><th>Contributed</th><th>Growth earned</th><th>Balance</th></tr>
+            </thead>
+            <tbody id="amort-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
     </div>
   </section>
 
-  <section class="wrap">
-    <div style="padding-bottom: 48px;">
-      <h2 style="font-family: var(--font-display); font-size: 22px;">How this is calculated</h2>
-      <p style="color: var(--ink-light); font-size: 14px; max-width: 60ch;">
-        Each month, your contribution is added to the balance, and the whole balance then grows by your expected monthly return. Over many months this compounding effect means growth builds on growth — later years typically add far more than early ones, even with the same contribution.
-      </p>
-      <p style="color: var(--ink-light); font-size: 14px; max-width: 60ch;">
-        Actual returns vary and are never guaranteed — this calculator assumes a constant rate for simplicity, while real markets fluctuate year to year.
-      </p>
+  <section class="wrap article-content">
+    <h2>What this calculator does</h2>
+    <p>This tool projects how a savings or investment balance grows over time, combining a starting amount, a regular monthly contribution, and an expected annual return. It separates the final balance into what you actually put in versus what compound growth added on top — so you can see how much of your future balance is genuinely "free" money from growth.</p>
+
+    <h2>How the calculation works</h2>
+    <p>Each month, your contribution is added to the current balance, and then the whole balance grows by your monthly return rate (the annual rate divided by 12). Because growth is calculated on the full balance — including money that already grew in previous months — the effect compounds: growth builds on growth, not just on your original contributions.</p>
+
+    <h3>Worked example</h3>
+    <p id="worked-example">Starting with $1,000 and contributing $200 a month at a 7% expected annual return over 10 years, the balance grows to roughly $35,000. Of that, around $25,000 came directly from your own contributions, and about $10,000 came purely from compound growth.</p>
+
+    <h2>Practical use cases</h2>
+    <ul>
+      <li>Estimating how a retirement or investment account could grow over decades</li>
+      <li>Testing whether increasing a monthly contribution meaningfully changes the long-term outcome</li>
+      <li>Comparing a lower starting amount with a higher monthly contribution against the reverse</li>
+      <li>Setting a realistic savings goal timeline for a specific target amount</li>
+    </ul>
+
+    <h2>Advantages of projecting growth early</h2>
+    <p>Compounding rewards time more than it rewards contribution size — starting small early often outperforms starting large late, because early growth has more years to compound on itself. Seeing this visually, rather than just being told it, tends to make the case for starting sooner more convincing.</p>
+
+    <h2>Limitations to keep in mind</h2>
+    <p>This calculator assumes a constant annual return for the entire period, but real markets and interest rates fluctuate year to year — some years may be flat or negative even if the long-term average matches your input. It also doesn't account for taxes, account fees, or inflation, all of which reduce real purchasing power of the final balance.</p>
+
+    <h2>Common mistakes people make</h2>
+    <ul>
+      <li>Assuming a market average return applies evenly every single year rather than averaging out over time</li>
+      <li>Ignoring the difference between nominal growth and inflation-adjusted (real) growth</li>
+      <li>Underestimating how much monthly contributions matter compared to the starting amount</li>
+      <li>Not accounting for fees or taxes that reduce the effective return in a real account</li>
+    </ul>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <h3>How does compound interest grow savings?</h3>
+      <p>Each period's growth is calculated on the full balance, including previously earned growth, so the balance accelerates the longer it stays invested.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Does contributing monthly make a big difference?</h3>
+      <p>Yes — regular contributions add new principal that also compounds, so consistent smaller amounts can outgrow a single larger deposit made later.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Why does growth accelerate in later years?</h3>
+      <p>Because interest is earned on both contributions and previously earned growth, the balance grows faster each year even at the same contribution level.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What return rate should I assume?</h3>
+      <p>It depends on where the money sits — savings accounts earn far less than diversified investments, so use a rate that matches your actual account type.</p>
+    </div>
+
+    <h2>A few practical tips</h2>
+    <ul>
+      <li>Starting a few years earlier often matters more than contributing a bit more per month</li>
+      <li>Use a conservative return estimate rather than an optimistic one when planning long-term goals</li>
+      <li>Revisit the numbers periodically — actual returns will differ from any single assumed rate</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>The gap between "contributed" and "final balance" in the results above is the real case for starting to save early — it's growth you didn't have to work for. Try a few different time horizons above to see how much that gap widens the longer money stays invested.</p>
+
+    <div class="meta-bar">
+      <span>Last updated: <span id="last-updated-date"></span></span>
+      <span>Methodology: standard compound growth formula</span>
+      <a href="disclaimer.html">Disclaimer</a>
+    </div>
+  </section>
+
+  <section class="wrap related-tools">
+    <h2>Related calculators</h2>
+    <div class="related-grid">
+      <a class="tool-card" href="emi-calculator.html">
+        <p class="tool-name">Loan Payment Calculator</p>
+        <p class="tool-desc">See your exact monthly loan payment and total interest.</p>
+      </a>
+      <a class="tool-card" href="take-home-pay-calculator.html">
+        <p class="tool-name">Take-Home Pay Calculator</p>
+        <p class="tool-desc">See what actually lands in your account after tax.</p>
+      </a>
     </div>
   </section>
 </main>
@@ -152,6 +305,8 @@
   </div>
 </footer>
 
+<button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top">&uarr;</button>
+
 <script src="assets/js/calculator.js"></script>
 <script>
   let currentCountry = "US";
@@ -161,6 +316,21 @@
   const rateEl = document.getElementById("savings-rate");
   const yearsEl = document.getElementById("savings-years");
   const extraEl = document.getElementById("extra-contribution");
+
+  function renderTable(initial, contrib, rate, years) {
+    const rows = generateSavingsSchedule(initial, contrib, rate, years);
+    const tbody = document.getElementById("amort-tbody");
+    tbody.innerHTML = "";
+    rows.forEach(function (row) {
+      const tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>Year " + row.year + "</td>" +
+        "<td>" + formatMoney(row.contributed, currentCountry) + "</td>" +
+        "<td>" + formatMoney(row.growth, currentCountry) + "</td>" +
+        "<td>" + formatMoney(row.balance, currentCountry) + "</td>";
+      tbody.appendChild(tr);
+    });
+  }
 
   function render() {
     const initial = Number(initialEl.value);
@@ -194,11 +364,12 @@
     } else {
       whatifResult.textContent = "";
     }
+
+    renderTable(initial, contrib, rate, years);
   }
 
   function onCountryChange(code) {
     currentCountry = code;
-    const c = COUNTRIES[code];
 
     initialEl.max = code === "IN" ? 4000000 : 50000;
     initialEl.step = code === "IN" ? 25000 : 500;
@@ -211,6 +382,18 @@
     extraEl.max = code === "IN" ? 50000 : 1000;
     extraEl.value = 0;
 
+    const initial = Number(initialEl.value);
+    const contrib = Number(contribEl.value);
+    const rate = Number(rateEl.value);
+    const years = Number(yearsEl.value);
+    const exampleCalc = calcSavingsGrowth(initial, contrib, rate, years);
+    document.getElementById("worked-example").textContent =
+      "Starting with " + formatMoney(initial, code) + " and contributing " + formatMoney(contrib, code) +
+      " a month at a " + rate + "% expected annual return over " + years + " " + (years === 1 ? "year" : "years") +
+      ", the balance grows to roughly " + formatMoney(exampleCalc.futureValue, code) + ". Of that, around " +
+      formatMoney(exampleCalc.totalContributed, code) + " came directly from your own contributions, and about " +
+      formatMoney(exampleCalc.totalGrowth, code) + " came purely from compound growth.";
+
     render();
   }
 
@@ -219,6 +402,42 @@
   [initialEl, contribEl, rateEl, yearsEl, extraEl].forEach(function (el) {
     el.addEventListener("input", render);
   });
+
+  const amortBtn = document.getElementById("btn-amort-toggle");
+  const amortWrap = document.getElementById("amort-table-wrap");
+  amortBtn.addEventListener("click", function () {
+    const isOpen = amortWrap.classList.toggle("open");
+    amortBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    amortBtn.textContent = isOpen ? "Hide yearly breakdown" : "Show yearly breakdown";
+  });
+
+  document.getElementById("btn-print").addEventListener("click", function () {
+    window.print();
+  });
+
+  document.getElementById("btn-copy").addEventListener("click", function () {
+    const text =
+      "Future value: " + document.getElementById("receipt-amount").textContent + "\n" +
+      "Total contributed: " + document.getElementById("total-contributed").textContent + "\n" +
+      "Growth earned: " + document.getElementById("total-growth").textContent;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(function () {
+        const btn = document.getElementById("btn-copy");
+        const original = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(function () { btn.textContent = original; }, 1500);
+      });
+    }
+  });
+
+  document.getElementById("btn-reset").addEventListener("click", function () {
+    onCountryChange(currentCountry);
+  });
+
+  document.getElementById("last-updated-date").textContent = new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+
+  initReadingProgress();
+  initBackToTop();
 </script>
 
 </body>
