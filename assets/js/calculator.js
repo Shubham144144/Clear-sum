@@ -286,7 +286,7 @@ function bindManualInput(sliderEl, inputEl, onChange) {
     inputEl.value = sliderEl.value;
   });
 
-  inputEl.addEventListener("input", function () {
+  function commit() {
     if (inputEl.value === "") return;
     const val = Number(inputEl.value);
     if (isNaN(val)) return;
@@ -296,6 +296,19 @@ function bindManualInput(sliderEl, inputEl, onChange) {
 
     sliderEl.value = val;
     onChange();
+  }
+
+  // Commit when the user finishes typing (leaves the field),
+  // not on every keystroke — avoids the slider jumping around
+  // mid-type while the number is still incomplete.
+  inputEl.addEventListener("change", commit);
+
+  // Let Enter / mobile keyboard "Done" commit immediately too.
+  inputEl.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      inputEl.blur();
+    }
   });
 }
 
