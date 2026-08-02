@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shubham144144.github.io/Clear-sum/sitemap.xml
