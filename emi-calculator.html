@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
 <meta name="google-site-verification" content="StGlqqepfkXty6FmWiPjf-_EkamMKfhvoo7njRvF3Ug" />
 <meta name="robots" content="index, follow">
 <title id="page-title">Loan Payment Calculator — See Your Exact Monthly Cost &amp; Full Amortization</title>
@@ -301,7 +305,7 @@
     <div class="meta-bar">
       <span>Last updated: <span id="last-updated-date"></span></span>
       <span>Methodology: standard amortization formula</span>
-      <a href="disclaimer.html">Disclaimer</a>
+      <a href="disclaimer.html">Disclaimer</a> · <a href="contact-us.html">Contact Us</a>
     </div>
   </section>
 
@@ -322,7 +326,7 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p>ClearSum provides general estimates for informational purposes only and is not financial advice. Rates and terms vary by lender. · <a href="privacy-policy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p>
+    <p>ClearSum provides general estimates for informational purposes only and is not financial advice. Rates and terms vary by lender. · <a href="privacy-policy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a> · <a href="contact-us.html">Contact Us</a></p>
   </div>
 </footer>
 
@@ -477,7 +481,17 @@
 
   /* Reset */
   document.getElementById("btn-reset").addEventListener("click", function () {
-    onCountryChange(currentCountry);
+    amountEl.value = 0;
+    rateEl.value = 0;
+    yearsEl.value = yearsEl.min || 1;
+    extraEl.value = 0;
+
+    amountManualEl.value = 0;
+    rateManualEl.value = 0;
+    yearsManualEl.value = yearsEl.min || 1;
+    extraManualEl.value = 0;
+
+    render();
   });
 
   /* Last updated date */
