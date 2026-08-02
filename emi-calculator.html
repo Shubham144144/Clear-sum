@@ -136,7 +136,7 @@
             <span>Loan amount</span>
             <span class="field-value" id="loan-amount-display">$25,000</span>
           </label>
-          <input type="range" id="loan-amount" min="1000" max="200000" step="500" value="25000">
+          <input type="range" id="loan-amount" min="0" max="200000" step="500" value="25000">
           <div class="manual-input-row">
             <input type="number" inputmode="decimal" enterkeyhint="done" id="loan-amount-manual" value="25000" aria-label="Enter exact loan amount">
           </div>
@@ -403,7 +403,7 @@
     document.getElementById("hero-heading").textContent = "What will your " + c.loanTermShort + " actually cost you?";
     document.getElementById("breadcrumb-current").textContent = c.loanTerm + " Calculator";
 
-    amountEl.min = 1000;
+    amountEl.min = 0;
     amountEl.max = code === "IN" ? 10000000 : 200000;
     amountEl.step = code === "IN" ? 5000 : 500;
     amountEl.value = c.defaultAmount;
