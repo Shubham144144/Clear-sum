@@ -210,3 +210,68 @@ function calcTax(grossAnnual, countryCode) {
 
   return { tax, netAnnual, effectiveRate };
 }
+
+/* ============================================
+   Amortization schedule (yearly breakdown)
+   ============================================ */
+function generateAmortizationSchedule(principal, annualRatePct, years) {
+  const monthlyRate = annualRatePct / 100 / 12;
+  const months = years * 12;
+  const { payment } = calcLoanPayment(principal, annualRatePct, years);
+
+  let balance = principal;
+  const yearlyRows = [];
+  let yearPrincipal = 0;
+  let yearInterest = 0;
+
+  for (let m = 1; m <= months; m++) {
+    const interest = monthlyRate === 0 ? 0 : balance * monthlyRate;
+    let principalPaid = payment - interest;
+    if (principalPaid > balance) principalPaid = balance;
+    balance -= principalPaid;
+    yearPrincipal += principalPaid;
+    yearInterest += interest;
+
+    if (m % 12 === 0 || m === months) {
+      yearlyRows.push({
+        year: Math.ceil(m / 12),
+        principalPaid: yearPrincipal,
+        interestPaid: yearInterest,
+        balance: Math.max(0, balance),
+      });
+      yearPrincipal = 0;
+      yearInterest = 0;
+    }
+  }
+
+  return yearlyRows;
+}
+
+/* ============================================
+   Shared page UI: reading progress + back-to-top
+   ============================================ */
+function initReadingProgress() {
+  const bar = document.getElementById("reading-progress");
+  if (!bar) return;
+  window.addEventListener("scroll", function () {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = pct + "%";
+  });
+}
+
+function initBackToTop() {
+  const btn = document.getElementById("back-to-top");
+  if (!btn) return;
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 500) {
+      btn.classList.add("visible");
+    } else {
+      btn.classList.remove("visible");
+    }
+  });
+  btn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
