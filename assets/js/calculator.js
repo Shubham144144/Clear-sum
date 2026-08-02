@@ -211,6 +211,31 @@ function calcTax(grossAnnual, countryCode) {
   return { tax, netAnnual, effectiveRate };
 }
 
+function calcTaxBracketBreakdown(grossAnnual, countryCode) {
+  const bands = TAX_BANDS[countryCode];
+  let lower = 0;
+  const rows = [];
+
+  for (const band of bands) {
+    if (grossAnnual > lower) {
+      const taxableInBand = Math.min(grossAnnual, band.upTo) - lower;
+      const taxInBand = taxableInBand * band.rate;
+      rows.push({
+        rangeLow: lower,
+        rangeHigh: band.upTo,
+        rate: band.rate * 100,
+        taxableInBand,
+        taxInBand,
+      });
+      lower = band.upTo;
+    } else {
+      break;
+    }
+  }
+
+  return rows;
+}
+
 /* ============================================
    Amortization schedule (yearly breakdown)
    ============================================ */
