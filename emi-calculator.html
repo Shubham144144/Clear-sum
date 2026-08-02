@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Loan Payment Calculator — See Your Exact Monthly Cost</title>
+<meta name="description" id="page-desc" content="Calculate your exact monthly loan payment and total interest. See what paying extra each month saves you — instantly, no sign-up.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How is a loan payment calculated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A loan payment is calculated from the loan amount, the annual interest rate, and the number of months in the term, using the standard amortization formula that spreads principal and interest across equal monthly payments."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does paying extra each month actually help?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Extra payments go directly toward the principal, which reduces the interest charged in every following month and can shorten the loan term significantly."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Clear<em>Sum</em></a>
+    <div class="country-stamp">
+      <select id="country-select" aria-label="Select your country">
+        <option value="US">United States</option>
+        <option value="GB">United Kingdom</option>
+        <option value="IN">India</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Loan calculator</p>
+      <h1 id="hero-heading">What will your loan actually cost you?</h1>
+      <p>Adjust the numbers below — your payment and total interest update instantly.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="wrap">
+
+      <div class="input-card">
+        <div class="field">
+          <label for="loan-amount">
+            <span>Loan amount</span>
+            <span class="field-value" id="loan-amount-display">$25,000</span>
+          </label>
+          <input type="range" id="loan-amount" min="1000" max="200000" step="500" value="25000">
+        </div>
+
+        <div class="field">
+          <label for="loan-rate">
+            <span>Interest rate (annual)</span>
+            <span class="field-value" id="loan-rate-display">6.5%</span>
+          </label>
+          <input type="range" id="loan-rate" min="0" max="20" step="0.1" value="6.5">
+        </div>
+
+        <div class="field">
+          <label for="loan-years">
+            <span>Loan term</span>
+            <span class="field-value" id="loan-years-display">5 years</span>
+          </label>
+          <input type="range" id="loan-years" min="1" max="30" step="1" value="5">
+        </div>
+      </div>
+
+      <div class="receipt">
+        <p class="receipt-headline" id="receipt-headline">Monthly Payment</p>
+        <p class="receipt-amount" id="receipt-amount">$489</p>
+
+        <div class="stack-bar">
+          <div class="seg-principal" id="seg-principal" style="width: 60%"></div>
+          <div class="seg-interest" id="seg-interest" style="width: 40%"></div>
+        </div>
+        <div class="stack-legend">
+          <span class="leg-principal">Principal</span>
+          <span class="leg-interest">Interest</span>
+        </div>
+
+        <div class="receipt-row">
+          <span class="rlabel">Total interest</span>
+          <span class="rval" id="total-interest">$4,340</span>
+        </div>
+        <div class="receipt-row">
+          <span class="rlabel">Total repaid</span>
+          <span class="rval" id="total-payment">$29,340</span>
+        </div>
+
+        <div class="whatif">
+          <p class="whatif-label">What if you paid extra each month?</p>
+          <div class="field" style="margin-bottom: 0;">
+            <label for="extra-payment" style="color: rgba(245,246,243,0.65);">
+              <span>Extra monthly payment</span>
+              <span class="field-value" id="extra-payment-display" style="color: var(--paper);">$0</span>
+            </label>
+            <input type="range" id="extra-payment" min="0" max="1000" step="10" value="0">
+          </div>
+          <p class="whatif-result" id="whatif-result" style="color: rgba(245,246,243,0.85);"></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div style="padding-bottom: 48px;">
+      <h2 style="font-family: var(--font-display); font-size: 22px;">How this is calculated</h2>
+      <p style="color: var(--ink-light); font-size: 14px; max-width: 60ch;">
+        Your payment is calculated using the standard amortization formula: it spreads the loan amount and interest evenly across every month of the term, so each payment is the same size — though the split between principal and interest shifts over time. Early payments are mostly interest; later ones are mostly principal.
+      </p>
+      <p style="color: var(--ink-light); font-size: 14px; max-width: 60ch;">
+        Paying extra each month goes straight to your principal, which is why it saves more in interest than the extra amount itself — every dollar off the principal is a dollar that stops accruing interest for the rest of the term.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>ClearSum provides general estimates for informational purposes only and is not financial advice. Rates and terms vary by lender. · <a href="privacy-policy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p>
+  </div>
+</footer>
+
+<script src="assets/js/calculator.js"></script>
+<script>
+  let currentCountry = "US";
+
+  const amountEl = document.getElementById("loan-amount");
+  const rateEl = document.getElementById("loan-rate");
+  const yearsEl = document.getElementById("loan-years");
+  const extraEl = document.getElementById("extra-payment");
+
+  function render() {
+    const c = COUNTRIES[currentCountry];
+    const principal = Number(amountEl.value);
+    const rate = Number(rateEl.value);
+    const years = Number(yearsEl.value);
+    const extra = Number(extraEl.value);
+
+    document.getElementById("loan-amount-display").textContent = formatMoney(principal, currentCountry);
+    document.getElementById("loan-rate-display").textContent = rate.toFixed(1) + "%";
+    document.getElementById("loan-years-display").textContent = years + (years === 1 ? " year" : " years");
+    document.getElementById("extra-payment-display").textContent = formatMoney(extra, currentCountry);
+
+    const { payment, totalPayment, totalInterest } = calcLoanPayment(principal, rate, years);
+
+    document.getElementById("receipt-headline").textContent = "Monthly " + c.loanTerm;
+    document.getElementById("receipt-amount").textContent = formatMoney(payment, currentCountry);
+    document.getElementById("total-interest").textContent = formatMoney(totalInterest, currentCountry);
+    document.getElementById("total-payment").textContent = formatMoney(totalPayment, currentCountry);
+
+    const principalPct = (principal / totalPayment) * 100;
+    const interestPct = 100 - principalPct;
+    document.getElementById("seg-principal").style.width = principalPct.toFixed(1) + "%";
+    document.getElementById("seg-interest").style.width = interestPct.toFixed(1) + "%";
+
+    const { monthsSaved, interestSaved } = calcExtraPaymentSavings(principal, rate, years, extra);
+    const whatifResult = document.getElementById("whatif-result");
+    if (extra > 0 && monthsSaved > 0) {
+      const yrs = Math.floor(monthsSaved / 12);
+      const mos = monthsSaved % 12;
+      let timeStr = "";
+      if (yrs > 0) timeStr += yrs + (yrs === 1 ? " year " : " years ");
+      if (mos > 0) timeStr += mos + (mos === 1 ? " month" : " months");
+      whatifResult.innerHTML = "You'd pay it off <strong>" + timeStr.trim() + " sooner</strong> and save <strong>" + formatMoney(interestSaved, currentCountry) + "</strong> in interest.";
+    } else {
+      whatifResult.textContent = "";
+    }
+  }
+
+  function onCountryChange(code) {
+    currentCountry = code;
+    const c = COUNTRIES[code];
+    document.getElementById("page-title").textContent = c.loanTerm + " Calculator — See Your Exact Monthly Cost";
+    document.getElementById("hero-heading").textContent = "What will your " + c.loanTermShort + " actually cost you?";
+
+    amountEl.min = 1000;
+    amountEl.max = code === "IN" ? 10000000 : 200000;
+    amountEl.step = code === "IN" ? 5000 : 500;
+    amountEl.value = c.defaultAmount;
+
+    rateEl.value = c.defaultRate;
+    yearsEl.value = c.defaultYears;
+    extraEl.max = code === "IN" ? 20000 : 1000;
+    extraEl.value = 0;
+
+    render();
+  }
+
+  initCountrySelector(onCountryChange);
+
+  [amountEl, rateEl, yearsEl, extraEl].forEach(function (el) {
+    el.addEventListener("input", render);
+  });
+</script>
+
+</body>
+</html>

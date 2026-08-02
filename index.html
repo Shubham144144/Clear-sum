@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loan Payment &amp; Money Calculators — Clear Numbers, No Guesswork</title>
+<meta name="description" content="Free loan payment, savings and tax calculators with instant visual breakdowns. See exactly what a loan really costs — no sign-up, no jargon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Clear<em>Sum</em></a>
+    <div class="country-stamp">
+      <select id="country-select" aria-label="Select your country">
+        <option value="US">United States</option>
+        <option value="GB">United Kingdom</option>
+        <option value="IN">India</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Free · No sign-up · Instant results</p>
+      <h1>See what a loan actually costs you — before you sign anything.</h1>
+      <p>Every calculator here shows the real breakdown: principal, interest, and what changes if you pay a little extra. No spreadsheets required.</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="tool-grid">
+      <a class="tool-card" href="emi-calculator.html">
+        <p class="tool-name" id="tool-loan-name">Loan Payment Calculator</p>
+        <p class="tool-desc">Enter the loan amount, rate and term — see your monthly payment and total interest instantly.</p>
+        <span class="tool-tag">Most popular</span>
+      </a>
+
+      <a class="tool-card" href="#" aria-disabled="true">
+        <p class="tool-name">Savings Growth Calculator</p>
+        <p class="tool-desc">See how a monthly contribution grows over time with compound interest.</p>
+        <span class="tool-tag">Coming soon</span>
+      </a>
+
+      <a class="tool-card" href="#" aria-disabled="true">
+        <p class="tool-name">Take-Home Pay Calculator</p>
+        <p class="tool-desc">Find out what actually lands in your account after tax and deductions.</p>
+        <span class="tool-tag">Coming soon</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>ClearSum provides general estimates for informational purposes only and is not financial advice. Rates and terms vary by lender. · <a href="privacy-policy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a></p>
+  </div>
+</footer>
+
+<script src="assets/js/calculator.js"></script>
+<script>
+  const loanToolName = {
+    US: "Loan Payment Calculator",
+    GB: "Loan Repayment Calculator",
+    IN: "EMI Calculator",
+  };
+
+  initCountrySelector(function (code) {
+    document.getElementById("tool-loan-name").textContent = loanToolName[code];
+  });
+</script>
+
+</body>
+</html>
