@@ -217,6 +217,32 @@ body {
   height: 4px;
 }
 
+.manual-input-row {
+  margin-top: 8px;
+}
+
+.manual-input-row input[type="number"] {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.manual-input-row input[type="number"]:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 1px;
+}
+
+.manual-input-row.on-dark input[type="number"] {
+  background: rgba(245,246,243,0.08);
+  border-color: rgba(245,246,243,0.3);
+  color: var(--paper);
+}
+
 .field input[type="number"] {
   width: 100%;
   font-family: var(--font-mono);
