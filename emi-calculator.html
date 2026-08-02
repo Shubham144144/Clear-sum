@@ -229,7 +229,7 @@
     </div>
 
     <h3>Worked example</h3>
-    <p>Say you borrow $25,000 at 6.5% annual interest over 5 years (60 months). The monthly rate is 6.5% &divide; 12 = 0.542%. Plugging that into the formula gives a fixed monthly payment of roughly $489. Over the full 5 years, you'd repay about $29,340 in total — meaning around $4,340 of that is interest, not principal.</p>
+    <p id="worked-example">Say you borrow $25,000 at 6.5% annual interest over 5 years (60 months). The monthly rate is 6.5% &divide; 12 = 0.542%. Plugging that into the formula gives a fixed monthly payment of roughly $489. Over the full 5 years, you'd repay about $29,340 in total — meaning around $4,340 of that is interest, not principal.</p>
 
     <h2>Practical use cases</h2>
     <ul>
@@ -395,6 +395,17 @@
     yearsEl.value = c.defaultYears;
     extraEl.max = code === "IN" ? 20000 : 1000;
     extraEl.value = 0;
+
+    const monthlyRatePct = (c.defaultRate / 12).toFixed(3);
+    const exampleCalc = calcLoanPayment(c.defaultAmount, c.defaultRate, c.defaultYears);
+    document.getElementById("worked-example").innerHTML =
+      "Say you borrow " + formatMoney(c.defaultAmount, code) + " at " + c.defaultRate + "% annual interest over " +
+      c.defaultYears + " " + (c.defaultYears === 1 ? "year" : "years") + " (" + (c.defaultYears * 12) + " months). " +
+      "The monthly rate is " + c.defaultRate + "% &divide; 12 = " + monthlyRatePct + "%. " +
+      "Plugging that into the formula gives a fixed monthly payment of roughly " + formatMoney(exampleCalc.payment, code) + ". " +
+      "Over the full " + c.defaultYears + " " + (c.defaultYears === 1 ? "year" : "years") + ", you'd repay about " +
+      formatMoney(exampleCalc.totalPayment, code) + " in total — meaning around " + formatMoney(exampleCalc.totalInterest, code) +
+      " of that is interest, not principal.";
 
     render();
   }
