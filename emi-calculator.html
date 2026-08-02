@@ -394,6 +394,8 @@
       if (yrs > 0) timeStr += yrs + (yrs === 1 ? " year " : " years ");
       if (mos > 0) timeStr += mos + (mos === 1 ? " month" : " months");
       whatifResult.innerHTML = "You'd pay it off <strong>" + timeStr.trim() + " sooner</strong> and save <strong>" + formatMoney(interestSaved, currentCountry) + "</strong> in interest.";
+    } else if (extra > 0 && interestSaved > 1) {
+      whatifResult.innerHTML = "You'd save <strong>" + formatMoney(interestSaved, currentCountry) + "</strong> in interest — not quite enough to shorten the term by a full month on a loan this short.";
     } else {
       whatifResult.textContent = "";
     }
