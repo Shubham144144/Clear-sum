@@ -275,3 +275,35 @@ function initBackToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
+/* ============================================
+   Savings growth — yearly breakdown
+   ============================================ */
+function generateSavingsSchedule(initial, monthlyContribution, annualRatePct, years) {
+  const monthlyRate = annualRatePct / 100 / 12;
+  let balance = initial;
+  let totalContributed = initial;
+  const rows = [];
+  let yearContributed = 0;
+  let yearStartBalance = initial;
+
+  for (let m = 1; m <= years * 12; m++) {
+    balance += monthlyContribution;
+    totalContributed += monthlyContribution;
+    yearContributed += monthlyContribution;
+    balance *= 1 + monthlyRate;
+
+    if (m % 12 === 0) {
+      rows.push({
+        year: m / 12,
+        contributed: yearContributed,
+        growth: balance - yearStartBalance - yearContributed,
+        balance: balance,
+      });
+      yearContributed = 0;
+      yearStartBalance = balance;
+    }
+  }
+
+  return rows;
+}
