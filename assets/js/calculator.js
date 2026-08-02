@@ -294,7 +294,14 @@ function bindManualInput(sliderEl, inputEl, onChange) {
     if (val > Number(sliderEl.max)) sliderEl.max = val;
     if (val < Number(sliderEl.min)) sliderEl.min = Math.max(0, val);
 
-    sliderEl.value = val;
+    const min = Number(sliderEl.min);
+    const step = Number(sliderEl.step) || 1;
+    // Snap to the slider's actual step grid so the number box
+    // never shows a value the slider itself can't represent.
+    const snapped = min + Math.round((val - min) / step) * step;
+
+    sliderEl.value = snapped;
+    inputEl.value = snapped;
     onChange();
   }
 
