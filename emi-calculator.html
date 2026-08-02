@@ -4,37 +4,102 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="StGlqqepfkXty6FmWiPjf-_EkamMKfhvoo7njRvF3Ug" />
-<title id="page-title">Loan Payment Calculator — See Your Exact Monthly Cost</title>
-<meta name="description" id="page-desc" content="Calculate your exact monthly loan payment and total interest. See what paying extra each month saves you — instantly, no sign-up.">
+<meta name="robots" content="index, follow">
+<title id="page-title">Loan Payment Calculator — See Your Exact Monthly Cost &amp; Full Amortization</title>
+<meta name="description" id="page-desc" content="Free loan payment calculator with instant results, a yearly amortization breakdown, and a what-if tool for extra payments. Works for US, UK and India.">
+<link rel="canonical" href="https://shubham144144.github.io/Clear-sum/emi-calculator.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Loan Payment Calculator — See Your Exact Monthly Cost">
+<meta property="og:description" content="Calculate your exact monthly loan payment, total interest, and full amortization schedule — instantly, no sign-up.">
+<meta property="og:url" content="https://shubham144144.github.io/Clear-sum/emi-calculator.html">
+<meta property="og:site_name" content="ClearSum">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Loan Payment Calculator — See Your Exact Monthly Cost">
+<meta name="twitter:description" content="Calculate your exact monthly loan payment, total interest, and full amortization schedule — instantly, no sign-up.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@graph": [
     {
-      "@type": "Question",
-      "name": "How is a loan payment calculated?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A loan payment is calculated from the loan amount, the annual interest rate, and the number of months in the term, using the standard amortization formula that spreads principal and interest across equal monthly payments."
-      }
+      "@type": "WebSite",
+      "@id": "https://shubham144144.github.io/Clear-sum/#website",
+      "url": "https://shubham144144.github.io/Clear-sum/",
+      "name": "ClearSum",
+      "publisher": { "@id": "https://shubham144144.github.io/Clear-sum/#organization" }
     },
     {
-      "@type": "Question",
-      "name": "Does paying extra each month actually help?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Extra payments go directly toward the principal, which reduces the interest charged in every following month and can shorten the loan term significantly."
-      }
+      "@type": "Organization",
+      "@id": "https://shubham144144.github.io/Clear-sum/#organization",
+      "name": "ClearSum",
+      "url": "https://shubham144144.github.io/Clear-sum/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shubham144144.github.io/Clear-sum/" },
+        { "@type": "ListItem", "position": 2, "name": "Loan Payment Calculator", "item": "https://shubham144144.github.io/Clear-sum/emi-calculator.html" }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Loan Payment Calculator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any (web-based)",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "url": "https://shubham144144.github.io/Clear-sum/emi-calculator.html"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://shubham144144.github.io/Clear-sum/emi-calculator.html#webpage",
+      "url": "https://shubham144144.github.io/Clear-sum/emi-calculator.html",
+      "name": "Loan Payment Calculator — See Your Exact Monthly Cost",
+      "isPartOf": { "@id": "https://shubham144144.github.io/Clear-sum/#website" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is a loan payment calculated?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A loan payment is calculated from the loan amount, the annual interest rate, and the number of months in the term, using the standard amortization formula that spreads principal and interest across equal monthly payments." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does paying extra each month actually help?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Extra payments go directly toward the principal, which reduces the interest charged in every following month and can shorten the loan term significantly." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does most of my early payment go to interest?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Interest is charged on the outstanding balance, which is highest at the start of the loan. As the balance shrinks over time, a larger share of each fixed payment goes toward principal instead." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between the interest rate and the true cost of a loan?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The interest rate is only one part of what a loan costs. The true cost also includes any fees, and how the interest compounds over the full term, which this calculator's total interest figure captures." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can this calculator be used for a mortgage?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The same amortization math applies to mortgages, so this calculator gives a usable estimate, though real mortgages often add property tax, insurance, and other escrow costs not modeled here." }
+        }
+      ]
     }
   ]
 }
 </script>
 </head>
 <body>
+
+<div class="reading-progress" id="reading-progress"></div>
 
 <header class="site-header">
   <div class="wrap">
@@ -49,12 +114,16 @@
   </div>
 </header>
 
+<nav class="wrap breadcrumb" aria-label="Breadcrumb">
+  <a href="index.html">Home</a><span class="sep">/</span><span id="breadcrumb-current">Loan Payment Calculator</span>
+</nav>
+
 <main>
   <section class="hero">
     <div class="wrap">
       <p class="eyebrow">Loan calculator</p>
       <h1 id="hero-heading">What will your loan actually cost you?</h1>
-      <p>Adjust the numbers below — your payment and total interest update instantly.</p>
+      <p>Adjust the numbers below — your payment, total interest, and full amortization schedule update instantly.</p>
     </div>
   </section>
 
@@ -87,7 +156,7 @@
         </div>
       </div>
 
-      <div class="receipt">
+      <div class="receipt" id="receipt-card">
         <p class="receipt-headline" id="receipt-headline">Monthly Payment</p>
         <p class="receipt-amount" id="receipt-amount">$489</p>
 
@@ -122,18 +191,118 @@
         </div>
       </div>
 
+      <div class="action-row">
+        <button class="action-btn" id="btn-print" type="button">Print results</button>
+        <button class="action-btn" id="btn-copy" type="button">Copy results</button>
+        <button class="action-btn" id="btn-reset" type="button">Reset</button>
+      </div>
+
+      <div class="amort-toggle">
+        <button class="action-btn" id="btn-amort-toggle" type="button" aria-expanded="false" aria-controls="amort-table-wrap">Show yearly breakdown</button>
+        <div class="amort-table-wrap" id="amort-table-wrap">
+          <table class="amort-table" id="amort-table" aria-label="Yearly amortization breakdown">
+            <thead>
+              <tr><th>Year</th><th>Principal paid</th><th>Interest paid</th><th>Remaining balance</th></tr>
+            </thead>
+            <tbody id="amort-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="ad-slot" aria-hidden="true">Ad slot — after calculator (responsive)</div>
+
     </div>
   </section>
 
-  <section class="wrap">
-    <div style="padding-bottom: 48px;">
-      <h2 style="font-family: var(--font-display); font-size: 22px;">How this is calculated</h2>
-      <p style="color: var(--ink-light); font-size: 14px; max-width: 60ch;">
-        Your payment is calculated using the standard amortization formula: it spreads the loan amount and interest evenly across every month of the term, so each payment is the same size — though the split between principal and interest shifts over time. Early payments are mostly interest; later ones are mostly principal.
-      </p>
-      <p style="color: var(--ink-light); font-size: 14px; max-width: 60ch;">
-        Paying extra each month goes straight to your principal, which is why it saves more in interest than the extra amount itself — every dollar off the principal is a dollar that stops accruing interest for the rest of the term.
-      </p>
+  <section class="wrap article-content">
+    <h2>What this calculator does</h2>
+    <p>This tool works out the fixed monthly payment on any loan — a personal loan, auto loan, mortgage, or (in India) an EMI — based on three inputs: how much you're borrowing, the annual interest rate, and how long you'll take to repay it. It then breaks that payment down into how much is principal versus interest, and lets you test what happens if you pay a bit extra each month.</p>
+
+    <h2>How the calculation works</h2>
+    <p>Loans with a fixed monthly payment use amortization: the lender calculates one payment amount that, if paid every month for the full term, exactly pays off both the loan and all the interest that accrues along the way. Because interest is charged on the remaining balance, and that balance is highest at the very start, early payments are mostly interest. As the balance shrinks, more of each payment goes toward principal — even though the payment amount itself never changes.</p>
+
+    <h3>The formula</h3>
+    <p>The standard formula is:</p>
+    <div class="example-box">
+      <strong>Payment = P &times; r &times; (1 + r)<sup>n</sup> / [(1 + r)<sup>n</sup> &minus; 1]</strong><br>
+      where P = loan amount, r = monthly interest rate (annual rate &divide; 12), and n = number of monthly payments.
+    </div>
+
+    <h3>Worked example</h3>
+    <p>Say you borrow $25,000 at 6.5% annual interest over 5 years (60 months). The monthly rate is 6.5% &divide; 12 = 0.542%. Plugging that into the formula gives a fixed monthly payment of roughly $489. Over the full 5 years, you'd repay about $29,340 in total — meaning around $4,340 of that is interest, not principal.</p>
+
+    <h2>Practical use cases</h2>
+    <ul>
+      <li>Comparing loan offers from different lenders before you apply</li>
+      <li>Checking whether a shorter term with a higher payment saves meaningfully on interest</li>
+      <li>Deciding whether making extra payments is worth it once you have spare cash</li>
+      <li>Getting a rough mortgage estimate before speaking with a lender</li>
+    </ul>
+
+    <h2>Advantages of using a payment calculator first</h2>
+    <p>Lenders quote interest rates, but rarely lead with the total dollar cost of interest over the full term — that number can be more persuasive than the rate itself. Running the numbers yourself before applying means you're negotiating from a position of knowing exactly what a rate difference of even half a percent costs you in real terms over the life of the loan.</p>
+
+    <h2>Limitations to keep in mind</h2>
+    <p>This calculator assumes a fixed interest rate for the full term and doesn't account for origination fees, closing costs, prepayment penalties, or variable-rate adjustments — all of which can change your real cost. For mortgages specifically, property tax and insurance escrow are not included, so your actual monthly outgoing will likely be higher than the payment figure shown here.</p>
+
+    <h2>Common mistakes people make</h2>
+    <ul>
+      <li>Focusing only on the monthly payment and ignoring total interest paid over the full term</li>
+      <li>Assuming a lower monthly payment always means a cheaper loan — a longer term often costs more overall even at a lower payment</li>
+      <li>Not checking whether extra payments actually reduce principal on their specific loan (some loans apply extra payments differently)</li>
+      <li>Forgetting that a lower rate with high fees can cost more than a slightly higher rate with none</li>
+    </ul>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <h3>How is a loan payment calculated?</h3>
+      <p>It's calculated using the loan amount, the interest rate, and the loan term, spread evenly across every monthly payment via the amortization formula above.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Does paying extra each month actually help?</h3>
+      <p>Yes — extra payments reduce your principal directly, which lowers the interest charged on every future payment and can shorten your loan term.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Why does most of my early payment go to interest?</h3>
+      <p>Interest is charged on the outstanding balance, which is highest early in the loan. As the balance falls, more of each payment shifts toward principal.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What's the difference between the rate and the true cost of a loan?</h3>
+      <p>The rate is only one input. The true cost includes total interest paid across the full term, plus any fees — which is why the total-interest figure matters as much as the rate.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can this calculator be used for a mortgage?</h3>
+      <p>The core math applies, so it gives a usable payment estimate — though real mortgages typically add property tax and insurance costs not modeled here.</p>
+    </div>
+
+    <h2>A few practical tips</h2>
+    <ul>
+      <li>Even a small extra monthly payment early in the loan saves more interest than the same amount paid later</li>
+      <li>Always compare the total interest figure, not just the monthly payment, when weighing two loan offers</li>
+      <li>Check whether your lender charges a prepayment penalty before planning to pay extra</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>A loan's monthly payment only tells part of the story — the total interest over the full term is often the number that actually determines whether a loan is a good deal. Use the calculator above with a few different rates and terms side by side before committing to any offer.</p>
+
+    <div class="meta-bar">
+      <span>Last updated: <span id="last-updated-date"></span></span>
+      <span>Methodology: standard amortization formula</span>
+      <a href="disclaimer.html">Disclaimer</a>
+    </div>
+  </section>
+
+  <section class="wrap related-tools">
+    <h2>Related calculators</h2>
+    <div class="related-grid">
+      <a class="tool-card" href="savings-calculator.html">
+        <p class="tool-name">Savings Growth Calculator</p>
+        <p class="tool-desc">See how a monthly contribution compounds over time.</p>
+      </a>
+      <a class="tool-card" href="take-home-pay-calculator.html">
+        <p class="tool-name">Take-Home Pay Calculator</p>
+        <p class="tool-desc">See what actually lands in your account after tax.</p>
+      </a>
     </div>
   </section>
 </main>
@@ -144,6 +313,8 @@
   </div>
 </footer>
 
+<button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top">&uarr;</button>
+
 <script src="assets/js/calculator.js"></script>
 <script>
   let currentCountry = "US";
@@ -152,6 +323,21 @@
   const rateEl = document.getElementById("loan-rate");
   const yearsEl = document.getElementById("loan-years");
   const extraEl = document.getElementById("extra-payment");
+
+  function renderAmortTable(principal, rate, years) {
+    const rows = generateAmortizationSchedule(principal, rate, years);
+    const tbody = document.getElementById("amort-tbody");
+    tbody.innerHTML = "";
+    rows.forEach(function (row) {
+      const tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>Year " + row.year + "</td>" +
+        "<td>" + formatMoney(row.principalPaid, currentCountry) + "</td>" +
+        "<td>" + formatMoney(row.interestPaid, currentCountry) + "</td>" +
+        "<td>" + formatMoney(row.balance, currentCountry) + "</td>";
+      tbody.appendChild(tr);
+    });
+  }
 
   function render() {
     const c = COUNTRIES[currentCountry];
@@ -189,13 +375,16 @@
     } else {
       whatifResult.textContent = "";
     }
+
+    renderAmortTable(principal, rate, years);
   }
 
   function onCountryChange(code) {
     currentCountry = code;
     const c = COUNTRIES[code];
-    document.getElementById("page-title").textContent = c.loanTerm + " Calculator — See Your Exact Monthly Cost";
+    document.getElementById("page-title").textContent = c.loanTerm + " Calculator — See Your Exact Monthly Cost & Full Amortization";
     document.getElementById("hero-heading").textContent = "What will your " + c.loanTermShort + " actually cost you?";
+    document.getElementById("breadcrumb-current").textContent = c.loanTerm + " Calculator";
 
     amountEl.min = 1000;
     amountEl.max = code === "IN" ? 10000000 : 200000;
@@ -215,6 +404,48 @@
   [amountEl, rateEl, yearsEl, extraEl].forEach(function (el) {
     el.addEventListener("input", render);
   });
+
+  /* Amortization toggle */
+  const amortBtn = document.getElementById("btn-amort-toggle");
+  const amortWrap = document.getElementById("amort-table-wrap");
+  amortBtn.addEventListener("click", function () {
+    const isOpen = amortWrap.classList.toggle("open");
+    amortBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    amortBtn.textContent = isOpen ? "Hide yearly breakdown" : "Show yearly breakdown";
+  });
+
+  /* Print */
+  document.getElementById("btn-print").addEventListener("click", function () {
+    window.print();
+  });
+
+  /* Copy results */
+  document.getElementById("btn-copy").addEventListener("click", function () {
+    const c = COUNTRIES[currentCountry];
+    const text =
+      c.loanTerm + ": " + document.getElementById("receipt-amount").textContent + "\n" +
+      "Total interest: " + document.getElementById("total-interest").textContent + "\n" +
+      "Total repaid: " + document.getElementById("total-payment").textContent;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(function () {
+        const btn = document.getElementById("btn-copy");
+        const original = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(function () { btn.textContent = original; }, 1500);
+      });
+    }
+  });
+
+  /* Reset */
+  document.getElementById("btn-reset").addEventListener("click", function () {
+    onCountryChange(currentCountry);
+  });
+
+  /* Last updated date */
+  document.getElementById("last-updated-date").textContent = new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+
+  initReadingProgress();
+  initBackToTop();
 </script>
 
 </body>
