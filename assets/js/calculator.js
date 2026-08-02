@@ -275,6 +275,30 @@ function generateAmortizationSchedule(principal, annualRatePct, years) {
 /* ============================================
    Shared page UI: reading progress + back-to-top
    ============================================ */
+/* ============================================
+   Sync a slider with a manual number input,
+   in both directions. Typing a value outside
+   the slider's current range extends the range
+   to fit, so users aren't capped by the slider.
+   ============================================ */
+function bindManualInput(sliderEl, inputEl, onChange) {
+  sliderEl.addEventListener("input", function () {
+    inputEl.value = sliderEl.value;
+  });
+
+  inputEl.addEventListener("input", function () {
+    if (inputEl.value === "") return;
+    const val = Number(inputEl.value);
+    if (isNaN(val)) return;
+
+    if (val > Number(sliderEl.max)) sliderEl.max = val;
+    if (val < Number(sliderEl.min)) sliderEl.min = Math.max(0, val);
+
+    sliderEl.value = val;
+    onChange();
+  });
+}
+
 function initReadingProgress() {
   const bar = document.getElementById("reading-progress");
   if (!bar) return;
