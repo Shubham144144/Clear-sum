@@ -137,6 +137,9 @@
             <span class="field-value" id="loan-amount-display">$25,000</span>
           </label>
           <input type="range" id="loan-amount" min="1000" max="200000" step="500" value="25000">
+          <div class="manual-input-row">
+            <input type="number" id="loan-amount-manual" value="25000" aria-label="Enter exact loan amount">
+          </div>
         </div>
 
         <div class="field">
@@ -145,6 +148,9 @@
             <span class="field-value" id="loan-rate-display">6.5%</span>
           </label>
           <input type="range" id="loan-rate" min="0" max="20" step="0.1" value="6.5">
+          <div class="manual-input-row">
+            <input type="number" id="loan-rate-manual" value="6.5" step="0.1" aria-label="Enter exact interest rate">
+          </div>
         </div>
 
         <div class="field">
@@ -153,6 +159,9 @@
             <span class="field-value" id="loan-years-display">5 years</span>
           </label>
           <input type="range" id="loan-years" min="1" max="30" step="1" value="5">
+          <div class="manual-input-row">
+            <input type="number" id="loan-years-manual" value="5" aria-label="Enter exact loan term in years">
+          </div>
         </div>
       </div>
 
@@ -186,6 +195,9 @@
               <span class="field-value" id="extra-payment-display" style="color: var(--paper);">$0</span>
             </label>
             <input type="range" id="extra-payment" min="0" max="1000" step="10" value="0">
+            <div class="manual-input-row on-dark">
+              <input type="number" id="extra-payment-manual" value="0" aria-label="Enter exact extra monthly payment">
+            </div>
           </div>
           <p class="whatif-result" id="whatif-result" style="color: rgba(245,246,243,0.85);"></p>
         </div>
@@ -324,6 +336,11 @@
   const yearsEl = document.getElementById("loan-years");
   const extraEl = document.getElementById("extra-payment");
 
+  const amountManualEl = document.getElementById("loan-amount-manual");
+  const rateManualEl = document.getElementById("loan-rate-manual");
+  const yearsManualEl = document.getElementById("loan-years-manual");
+  const extraManualEl = document.getElementById("extra-payment-manual");
+
   function renderAmortTable(principal, rate, years) {
     const rows = generateAmortizationSchedule(principal, rate, years);
     const tbody = document.getElementById("amort-tbody");
@@ -396,6 +413,11 @@
     extraEl.max = code === "IN" ? 20000 : 1000;
     extraEl.value = 0;
 
+    amountManualEl.value = amountEl.value;
+    rateManualEl.value = rateEl.value;
+    yearsManualEl.value = yearsEl.value;
+    extraManualEl.value = 0;
+
     const monthlyRatePct = (c.defaultRate / 12).toFixed(3);
     const exampleCalc = calcLoanPayment(c.defaultAmount, c.defaultRate, c.defaultYears);
     document.getElementById("worked-example").innerHTML =
@@ -415,6 +437,11 @@
   [amountEl, rateEl, yearsEl, extraEl].forEach(function (el) {
     el.addEventListener("input", render);
   });
+
+  bindManualInput(amountEl, amountManualEl, render);
+  bindManualInput(rateEl, rateManualEl, render);
+  bindManualInput(yearsEl, yearsManualEl, render);
+  bindManualInput(extraEl, extraManualEl, render);
 
   /* Amortization toggle */
   const amortBtn = document.getElementById("btn-amort-toggle");

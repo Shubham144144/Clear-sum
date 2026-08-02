@@ -132,6 +132,9 @@
             <span class="field-value" id="initial-amount-display">$1,000</span>
           </label>
           <input type="range" id="initial-amount" min="0" max="50000" step="500" value="1000">
+          <div class="manual-input-row">
+            <input type="number" id="initial-amount-manual" value="1000" aria-label="Enter exact starting amount">
+          </div>
         </div>
 
         <div class="field">
@@ -140,6 +143,9 @@
             <span class="field-value" id="monthly-contribution-display">$200</span>
           </label>
           <input type="range" id="monthly-contribution" min="0" max="3000" step="25" value="200">
+          <div class="manual-input-row">
+            <input type="number" id="monthly-contribution-manual" value="200" aria-label="Enter exact monthly contribution">
+          </div>
         </div>
 
         <div class="field">
@@ -148,6 +154,9 @@
             <span class="field-value" id="savings-rate-display">7%</span>
           </label>
           <input type="range" id="savings-rate" min="0" max="15" step="0.1" value="7">
+          <div class="manual-input-row">
+            <input type="number" id="savings-rate-manual" value="7" step="0.1" aria-label="Enter exact expected annual return">
+          </div>
         </div>
 
         <div class="field">
@@ -156,6 +165,9 @@
             <span class="field-value" id="savings-years-display">10 years</span>
           </label>
           <input type="range" id="savings-years" min="1" max="40" step="1" value="10">
+          <div class="manual-input-row">
+            <input type="number" id="savings-years-manual" value="10" aria-label="Enter exact time horizon in years">
+          </div>
         </div>
       </div>
 
@@ -189,6 +201,9 @@
               <span class="field-value" id="extra-contribution-display" style="color: var(--paper);">$0</span>
             </label>
             <input type="range" id="extra-contribution" min="0" max="1000" step="25" value="0">
+            <div class="manual-input-row on-dark">
+              <input type="number" id="extra-contribution-manual" value="0" aria-label="Enter exact extra monthly contribution">
+            </div>
           </div>
           <p class="whatif-result" id="whatif-result" style="color: rgba(245,246,243,0.85);"></p>
         </div>
@@ -317,6 +332,12 @@
   const yearsEl = document.getElementById("savings-years");
   const extraEl = document.getElementById("extra-contribution");
 
+  const initialManualEl = document.getElementById("initial-amount-manual");
+  const contribManualEl = document.getElementById("monthly-contribution-manual");
+  const rateManualEl = document.getElementById("savings-rate-manual");
+  const yearsManualEl = document.getElementById("savings-years-manual");
+  const extraManualEl = document.getElementById("extra-contribution-manual");
+
   function renderTable(initial, contrib, rate, years) {
     const rows = generateSavingsSchedule(initial, contrib, rate, years);
     const tbody = document.getElementById("amort-tbody");
@@ -382,6 +403,12 @@
     extraEl.max = code === "IN" ? 50000 : 1000;
     extraEl.value = 0;
 
+    initialManualEl.value = initialEl.value;
+    contribManualEl.value = contribEl.value;
+    rateManualEl.value = rateEl.value;
+    yearsManualEl.value = yearsEl.value;
+    extraManualEl.value = 0;
+
     const initial = Number(initialEl.value);
     const contrib = Number(contribEl.value);
     const rate = Number(rateEl.value);
@@ -402,6 +429,12 @@
   [initialEl, contribEl, rateEl, yearsEl, extraEl].forEach(function (el) {
     el.addEventListener("input", render);
   });
+
+  bindManualInput(initialEl, initialManualEl, render);
+  bindManualInput(contribEl, contribManualEl, render);
+  bindManualInput(rateEl, rateManualEl, render);
+  bindManualInput(yearsEl, yearsManualEl, render);
+  bindManualInput(extraEl, extraManualEl, render);
 
   const amortBtn = document.getElementById("btn-amort-toggle");
   const amortWrap = document.getElementById("amort-table-wrap");

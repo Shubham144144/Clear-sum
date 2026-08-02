@@ -132,6 +132,9 @@
             <span class="field-value" id="gross-salary-display">$60,000</span>
           </label>
           <input type="range" id="gross-salary" min="0" max="300000" step="1000" value="60000">
+          <div class="manual-input-row">
+            <input type="number" id="gross-salary-manual" value="60000" aria-label="Enter exact gross annual salary">
+          </div>
         </div>
       </div>
 
@@ -284,6 +287,7 @@
   let currentCountry = "US";
 
   const salaryEl = document.getElementById("gross-salary");
+  const salaryManualEl = document.getElementById("gross-salary-manual");
 
   function renderTable(gross) {
     const rows = calcTaxBracketBreakdown(gross, currentCountry);
@@ -328,6 +332,7 @@
     salaryEl.max = code === "IN" ? 10000000 : 300000;
     salaryEl.step = code === "IN" ? 10000 : 1000;
     salaryEl.value = code === "IN" ? 800000 : 60000;
+    salaryManualEl.value = salaryEl.value;
 
     const gross = Number(salaryEl.value);
     const { tax, effectiveRate } = calcTax(gross, code);
@@ -341,6 +346,7 @@
 
   initCountrySelector(onCountryChange);
   salaryEl.addEventListener("input", render);
+  bindManualInput(salaryEl, salaryManualEl, render);
 
   const amortBtn = document.getElementById("btn-amort-toggle");
   const amortWrap = document.getElementById("amort-table-wrap");
