@@ -326,7 +326,13 @@ function bindManualInput(sliderEl, inputEl, onChange) {
    ============================================ */
 function shareViaWhatsApp(text) {
   const url = "https://wa.me/?text=" + encodeURIComponent(text);
-  window.location.href = url;
+  const a = document.createElement("a");
+  a.href = url;
+  a.target = "_blank";
+  a.rel = "noopener";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 
 function initReadingProgress() {
