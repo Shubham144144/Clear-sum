@@ -177,6 +177,7 @@
       <div class="action-row">
         <button class="action-btn" id="btn-print" type="button">Print results</button>
         <button class="action-btn" id="btn-copy" type="button">Copy results</button>
+        <button class="action-btn" id="btn-whatsapp" type="button">Share via WhatsApp</button>
         <button class="action-btn" id="btn-reset" type="button">Reset</button>
       </div>
 
@@ -379,6 +380,17 @@
         setTimeout(function () { btn.textContent = original; }, 1500);
       });
     }
+  });
+
+  document.getElementById("btn-whatsapp").addEventListener("click", function () {
+    const text =
+      "Take-home pay estimate (via ClearSum):\n" +
+      "Take-home pay: " + document.getElementById("receipt-amount").textContent + "\n" +
+      "Annual tax: " + document.getElementById("annual-tax").textContent + "\n" +
+      "Net annual: " + document.getElementById("net-annual").textContent + "\n" +
+      "Effective rate: " + document.getElementById("effective-rate").textContent + "\n" +
+      "https://shubham144144.github.io/Clear-sum/take-home-pay-calculator.html";
+    shareViaWhatsApp(text);
   });
 
   document.getElementById("btn-reset").addEventListener("click", function () {

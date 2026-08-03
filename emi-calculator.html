@@ -211,6 +211,7 @@
       <div class="action-row">
         <button class="action-btn" id="btn-print" type="button">Print results</button>
         <button class="action-btn" id="btn-copy" type="button">Copy results</button>
+        <button class="action-btn" id="btn-whatsapp" type="button">Share via WhatsApp</button>
         <button class="action-btn" id="btn-reset" type="button">Reset</button>
       </div>
 
@@ -482,6 +483,17 @@
   });
 
   /* Reset */
+  document.getElementById("btn-whatsapp").addEventListener("click", function () {
+    const c = COUNTRIES[currentCountry];
+    const text =
+      "Loan payment estimate (via ClearSum):\n" +
+      c.loanTerm + ": " + document.getElementById("receipt-amount").textContent + "\n" +
+      "Total interest: " + document.getElementById("total-interest").textContent + "\n" +
+      "Total repaid: " + document.getElementById("total-payment").textContent + "\n" +
+      "https://shubham144144.github.io/Clear-sum/emi-calculator.html";
+    shareViaWhatsApp(text);
+  });
+
   document.getElementById("btn-reset").addEventListener("click", function () {
     amountEl.value = 0;
     rateEl.value = 0;
