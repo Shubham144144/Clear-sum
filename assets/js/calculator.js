@@ -319,6 +319,16 @@ function bindManualInput(sliderEl, inputEl, onChange) {
   });
 }
 
+/* ============================================
+   Share a result via WhatsApp — opens WhatsApp
+   (app on mobile, web on desktop) with the
+   result text pre-filled, ready to send.
+   ============================================ */
+function shareViaWhatsApp(text) {
+  const url = "https://wa.me/?text=" + encodeURIComponent(text);
+  window.open(url, "_blank");
+}
+
 function initReadingProgress() {
   const bar = document.getElementById("reading-progress");
   if (!bar) return;
