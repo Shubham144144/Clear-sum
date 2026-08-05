@@ -509,8 +509,23 @@
 
   /* Reset */
   document.getElementById("btn-reset").addEventListener("click", function () {
-    applyCountryRanges(currentCountry);
-    buildPlatformOptions(currentCountry);
+    platformSelect.selectedIndex = 0;
+    currentPlatform = platformSelect.value;
+
+    priceEl.value = 0;
+    costEl.value = 0;
+    shipEl.value = 0;
+    feePctEl.value = 0;
+    flatFeeEl.value = 0;
+    priceIncreaseEl.value = 0;
+
+    priceManualEl.value = 0;
+    costManualEl.value = 0;
+    shipManualEl.value = 0;
+    feePctManualEl.value = 0;
+    flatFeeManualEl.value = 0;
+    priceIncreaseManualEl.value = 0;
+
     render();
   });
 
