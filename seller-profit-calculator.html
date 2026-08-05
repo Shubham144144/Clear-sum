@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+<meta name="google-site-verification" content="StGlqqepfkXty6FmWiPjf-_EkamMKfhvoo7njRvF3Ug" />
+<meta name="robots" content="index, follow">
+<title id="page-title">Seller Profit Calculator — See Your Real Margin After Platform Fees</title>
+<meta name="description" id="page-desc" content="Free seller profit calculator for Amazon, eBay, Etsy and Shopify. Enter your cost, shipping and fees to see your exact net profit, margin and ROI — for US and UK sellers.">
+<link rel="canonical" href="https://shubham144144.github.io/Clear-sum/seller-profit-calculator.html">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Seller Profit Calculator — See Your Real Margin After Platform Fees">
+<meta property="og:description" content="Calculate your exact net profit, margin and ROI after product cost, shipping and marketplace fees — instantly, no sign-up.">
+<meta property="og:url" content="https://shubham144144.github.io/Clear-sum/seller-profit-calculator.html">
+<meta property="og:site_name" content="ClearSum">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Seller Profit Calculator — See Your Real Margin After Platform Fees">
+<meta name="twitter:description" content="Calculate your exact net profit, margin and ROI after product cost, shipping and marketplace fees — instantly, no sign-up.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://shubham144144.github.io/Clear-sum/#website",
+      "url": "https://shubham144144.github.io/Clear-sum/",
+      "name": "ClearSum",
+      "publisher": { "@id": "https://shubham144144.github.io/Clear-sum/#organization" }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://shubham144144.github.io/Clear-sum/#organization",
+      "name": "ClearSum",
+      "url": "https://shubham144144.github.io/Clear-sum/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://shubham144144.github.io/Clear-sum/" },
+        { "@type": "ListItem", "position": 2, "name": "Seller Profit Calculator", "item": "https://shubham144144.github.io/Clear-sum/seller-profit-calculator.html" }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Seller Profit Calculator",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Any (web-based)",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "url": "https://shubham144144.github.io/Clear-sum/seller-profit-calculator.html"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is seller profit calculated?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Net profit is your selling price minus product cost, shipping cost, and platform fees (a percentage-based fee plus any flat fee per order)." }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between profit margin and ROI?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Profit margin is net profit as a percentage of your selling price. ROI is net profit as a percentage of what you actually spent to acquire and ship the item, so it shows how hard your invested money is working." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why do platform fees vary so much between marketplaces?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Amazon and eBay charge a referral or final value fee for access to their built-in customer base, Etsy combines a transaction fee with payment processing, and Shopify only charges payment processing since you bring your own traffic to your own store." }
+        },
+        {
+          "@type": "Question",
+          "name": "Are the platform fee presets exact?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. They are headline rates for a typical category, used as a starting point. Real fees vary by product category, account type, and fulfillment method, so every field is editable to match your actual rate." }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="reading-progress" id="reading-progress"></div>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Clear<em>Sum</em></a>
+    <div class="country-stamp">
+      <select id="country-select" aria-label="Select your country">
+        <option value="US">United States</option>
+        <option value="GB">United Kingdom</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<nav class="wrap breadcrumb" aria-label="Breadcrumb">
+  <a href="index.html">Home</a><span class="sep">/</span><span id="breadcrumb-current">Seller Profit Calculator</span>
+</nav>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Seller profit calculator</p>
+      <h1>What do you actually keep after platform fees?</h1>
+      <p>Pick your marketplace, enter your numbers, and see your real net profit, margin and ROI — updated instantly as you type.</p>
+    </div>
+  </section>
+
+  <section class="calc-section">
+    <div class="wrap">
+
+      <div class="input-card">
+        <div class="field">
+          <label for="platform-select">
+            <span>Selling platform</span>
+          </label>
+          <select id="platform-select" aria-label="Select your selling platform">
+            <option value="amazon">Amazon</option>
+            <option value="ebay">eBay</option>
+            <option value="etsy">Etsy</option>
+            <option value="shopify">Shopify (own store)</option>
+            <option value="other">Other / custom</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="selling-price">
+            <span>Selling price</span>
+            <span class="field-value" id="selling-price-display">$40</span>
+          </label>
+          <input type="range" id="selling-price" min="0" max="300" step="1" value="40">
+          <div class="manual-input-row">
+            <input type="number" inputmode="decimal" enterkeyhint="done" id="selling-price-manual" value="40" aria-label="Enter exact selling price">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="product-cost">
+            <span>Product cost</span>
+            <span class="field-value" id="product-cost-display">$12</span>
+          </label>
+          <input type="range" id="product-cost" min="0" max="200" step="1" value="12">
+          <div class="manual-input-row">
+            <input type="number" inputmode="decimal" enterkeyhint="done" id="product-cost-manual" value="12" aria-label="Enter exact product cost">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="shipping-cost">
+            <span>Shipping cost</span>
+            <span class="field-value" id="shipping-cost-display">$4.00</span>
+          </label>
+          <input type="range" id="shipping-cost" min="0" max="50" step="0.5" value="4">
+          <div class="manual-input-row">
+            <input type="number" inputmode="decimal" enterkeyhint="done" id="shipping-cost-manual" value="4" step="0.5" aria-label="Enter exact shipping cost">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="fee-pct">
+            <span>Platform fee (% of price)</span>
+            <span class="field-value" id="fee-pct-display">15%</span>
+          </label>
+          <input type="range" id="fee-pct" min="0" max="30" step="0.1" value="15">
+          <div class="manual-input-row">
+            <input type="number" inputmode="decimal" enterkeyhint="done" id="fee-pct-manual" value="15" step="0.1" aria-label="Enter exact platform fee percentage">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="flat-fee">
+            <span>Flat fee per order</span>
+            <span class="field-value" id="flat-fee-display">$0.00</span>
+          </label>
+          <input type="range" id="flat-fee" min="0" max="3" step="0.05" value="0">
+          <div class="manual-input-row">
+            <input type="number" inputmode="decimal" enterkeyhint="done" id="flat-fee-manual" value="0" step="0.05" aria-label="Enter exact flat fee per order">
+          </div>
+        </div>
+      </div>
+
+      <div class="receipt" id="receipt-card">
+        <p class="receipt-headline" id="receipt-headline">Net Profit Per Sale</p>
+        <p class="receipt-amount" id="receipt-amount">$18.20</p>
+
+        <div class="stack-bar">
+          <div class="seg-cost" id="seg-cost" style="width: 40%"></div>
+          <div class="seg-fees" id="seg-fees" style="width: 15%"></div>
+          <div class="seg-profit" id="seg-profit" style="width: 45%"></div>
+        </div>
+        <div class="stack-legend">
+          <span class="leg-cost">Cost</span>
+          <span class="leg-fees">Fees</span>
+          <span class="leg-profit">Profit</span>
+        </div>
+
+        <div class="receipt-row">
+          <span class="rlabel">Platform fees</span>
+          <span class="rval" id="total-fees">$6.00</span>
+        </div>
+        <div class="receipt-row">
+          <span class="rlabel">Profit margin</span>
+          <span class="rval" id="profit-margin">45.5%</span>
+        </div>
+        <div class="receipt-row">
+          <span class="rlabel">ROI</span>
+          <span class="rval" id="roi">113.8%</span>
+        </div>
+
+        <div class="whatif">
+          <p class="whatif-label">What if you raised your price?</p>
+          <div class="field" style="margin-bottom: 0;">
+            <label for="price-increase" style="color: rgba(245,246,243,0.65);">
+              <span>Price increase</span>
+              <span class="field-value" id="price-increase-display" style="color: var(--paper);">$0</span>
+            </label>
+            <input type="range" id="price-increase" min="0" max="50" step="1" value="0">
+            <div class="manual-input-row on-dark">
+              <input type="number" inputmode="decimal" enterkeyhint="done" id="price-increase-manual" value="0" aria-label="Enter exact price increase">
+            </div>
+          </div>
+          <p class="whatif-result" id="whatif-result" style="color: rgba(245,246,243,0.85);"></p>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <button class="action-btn" id="btn-print" type="button">Print results</button>
+        <button class="action-btn" id="btn-copy" type="button">Copy results</button>
+        <button class="action-btn" id="btn-whatsapp" type="button">Share via WhatsApp</button>
+        <button class="action-btn" id="btn-reset" type="button">Reset</button>
+      </div>
+
+      <div class="ad-slot" aria-hidden="true">Advertisement</div>
+
+    </div>
+  </section>
+
+  <section class="wrap article-content">
+    <h2>What this calculator does</h2>
+    <p>This tool works out what you actually keep from a sale after every real cost is subtracted: what you paid for the product, what it cost to ship, and what the platform takes in fees. It shows net profit per sale, your profit margin, and your ROI, then lets you test what happens if you raise your price.</p>
+
+    <h2>How the calculation works</h2>
+    <p>Most marketplaces charge a percentage-based fee on the selling price, and some add a small flat fee per order on top. Your net profit is what's left once product cost, shipping cost, and both fee types are subtracted from the selling price. Profit margin measures that profit against your selling price, while ROI measures it against what you actually spent up front — product and shipping — which is usually the more useful number for deciding whether a product is worth sourcing again.</p>
+
+    <h3>The formula</h3>
+    <p>The calculation is:</p>
+    <div class="example-box">
+      <strong>Net Profit = Selling Price &minus; Product Cost &minus; Shipping Cost &minus; (Selling Price &times; Fee%) &minus; Flat Fee</strong><br>
+      Profit Margin = Net Profit &divide; Selling Price &times; 100. ROI = Net Profit &divide; (Product Cost + Shipping Cost) &times; 100.
+    </div>
+
+    <h3>Worked example</h3>
+    <p id="worked-example">Say you sell a product for $40 on Amazon, where it cost you $12 and $4 to ship. Amazon's referral fee runs about 15% of the price, or $6.00, with no flat fee. Subtracting $12 + $4 + $6.00 from $40 leaves a net profit of $18.00 — a profit margin of about 45% and an ROI of about 113% on the $16 you actually spent.</p>
+
+    <h2>Practical use cases</h2>
+    <ul>
+      <li>Deciding whether a product idea is worth sourcing before you commit budget to it</li>
+      <li>Comparing the same product's real profit across Amazon, eBay, Etsy and your own Shopify store</li>
+      <li>Checking whether a price increase actually improves profit once fees scale with it</li>
+      <li>Spotting products where margin looks fine but ROI is too thin to justify the cash tied up</li>
+    </ul>
+
+    <h2>Advantages of checking profit before you list</h2>
+    <p>Selling price and product cost alone can make a product look profitable when it isn't — platform fees quietly take a meaningful cut, and a flat fee per order can wipe out margin entirely on lower-priced items. Running the real numbers first means you find that out before you've bought inventory, not after.</p>
+
+    <h2>Limitations to keep in mind</h2>
+    <p>The platform fee presets are headline rates for a typical category and are meant as a starting point, not an exact quote — real fees vary by product category, account type, and fulfillment method (like Amazon FBA storage and fulfillment fees, which aren't modeled here). Currency conversion, sales tax or VAT, returns, and advertising spend also aren't included, so treat the result as a per-sale estimate rather than your full cost of doing business.</p>
+
+    <h2>Common mistakes sellers make</h2>
+    <ul>
+      <li>Looking only at profit margin and ignoring ROI, which matters more when cash is limited</li>
+      <li>Forgetting that a flat fee per order hits low-priced items much harder than high-priced ones</li>
+      <li>Comparing platforms on fee percentage alone without checking flat fees and typical price points</li>
+      <li>Not re-checking margin after a price change, since fees that scale with price eat into part of the increase</li>
+    </ul>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <h3>How is seller profit calculated?</h3>
+      <p>Net profit is your selling price minus product cost, shipping cost, and platform fees — a percentage-based fee plus any flat fee per order.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What's the difference between profit margin and ROI?</h3>
+      <p>Margin is profit as a share of your selling price. ROI is profit as a share of what you actually spent, which shows how hard your invested money is working.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Why do platform fees vary so much between marketplaces?</h3>
+      <p>Amazon and eBay charge for access to their built-in customer base, Etsy combines a transaction fee with payment processing, and Shopify only charges payment processing since you bring your own traffic.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Are the platform fee presets exact?</h3>
+      <p>No — they're typical headline rates used as a starting point. Every field is editable so you can match your actual category rate.</p>
+    </div>
+
+    <h2>A few practical tips</h2>
+    <ul>
+      <li>Check ROI, not just margin, when deciding between two products with limited budget</li>
+      <li>Re-run the numbers per platform before choosing where to list a given product</li>
+      <li>Build in a buffer for returns and ad spend, since neither is included in this estimate</li>
+    </ul>
+
+    <h2>Conclusion</h2>
+    <p>A selling price only tells part of the story — what you actually keep depends on product cost, shipping, and how much the platform takes. Run a product through this calculator before you commit budget to it, and compare it across platforms before deciding where to list.</p>
+
+    <div class="meta-bar">
+      <span>Last updated: <span id="last-updated-date"></span></span>
+      <span>Methodology: price minus cost, shipping and platform fees</span>
+      <a href="disclaimer.html">Disclaimer</a> · <a href="contact-us.html">Contact Us</a>
+    </div>
+  </section>
+
+  <section class="wrap related-tools">
+    <h2>Related calculators</h2>
+    <div class="related-grid">
+      <a class="tool-card" href="emi-calculator.html">
+        <p class="tool-name">Loan Payment Calculator</p>
+        <p class="tool-desc">See your exact monthly payment and total interest.</p>
+      </a>
+      <a class="tool-card" href="take-home-pay-calculator.html">
+        <p class="tool-name">Take-Home Pay Calculator</p>
+        <p class="tool-desc">See what actually lands in your account after tax.</p>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>ClearSum provides general estimates for informational purposes only and is not financial advice. Rates and fees vary by platform and category. · <a href="privacy-policy.html">Privacy</a> · <a href="disclaimer.html">Disclaimer</a> · <a href="contact-us.html">Contact Us</a></p>
+  </div>
+</footer>
+
+<button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top">&uarr;</button>
+
+<script src="assets/js/calculator.js"></script>
+<script>
+  let currentCountry = "US";
+  let currentPlatform = "amazon";
+
+  const platformSelect = document.getElementById("platform-select");
+  const priceEl = document.getElementById("selling-price");
+  const costEl = document.getElementById("product-cost");
+  const shipEl = document.getElementById("shipping-cost");
+  const feePctEl = document.getElementById("fee-pct");
+  const flatFeeEl = document.getElementById("flat-fee");
+  const priceIncreaseEl = document.getElementById("price-increase");
+
+  const priceManualEl = document.getElementById("selling-price-manual");
+  const costManualEl = document.getElementById("product-cost-manual");
+  const shipManualEl = document.getElementById("shipping-cost-manual");
+  const feePctManualEl = document.getElementById("fee-pct-manual");
+  const flatFeeManualEl = document.getElementById("flat-fee-manual");
+  const priceIncreaseManualEl = document.getElementById("price-increase-manual");
+
+  function render() {
+    const price = Number(priceEl.value);
+    const cost = Number(costEl.value);
+    const ship = Number(shipEl.value);
+    const feePct = Number(feePctEl.value);
+    const flatFee = Number(flatFeeEl.value);
+    const increase = Number(priceIncreaseEl.value);
+
+    document.getElementById("selling-price-display").textContent = formatMoney(price, currentCountry);
+    document.getElementById("product-cost-display").textContent = formatMoney(cost, currentCountry);
+    document.getElementById("shipping-cost-display").textContent = formatMoney(ship, currentCountry);
+    document.getElementById("fee-pct-display").textContent = feePct.toFixed(1) + "%";
+    document.getElementById("flat-fee-display").textContent = formatMoney(flatFee, currentCountry);
+    document.getElementById("price-increase-display").textContent = formatMoney(increase, currentCountry);
+
+    const result = calcSellerProfit(price, cost, ship, feePct, flatFee);
+
+    document.getElementById("receipt-headline").textContent = result.netProfit < 0 ? "Net Loss Per Sale" : "Net Profit Per Sale";
+    document.getElementById("receipt-amount").textContent = formatMoney(result.netProfit, currentCountry);
+    document.getElementById("receipt-amount").style.color = result.netProfit < 0 ? "#E8A499" : "var(--paper)";
+
+    document.getElementById("total-fees").textContent = formatMoney(result.platformFees, currentCountry);
+    document.getElementById("profit-margin").textContent = result.profitMargin.toFixed(1) + "%";
+    document.getElementById("roi").textContent = result.roi.toFixed(1) + "%";
+
+    let costPct = 0, feesPct = 0, profitPct = 0;
+    if (price > 0) {
+      costPct = Math.max(0, Math.min(100, (result.investedCost / price) * 100));
+      feesPct = Math.max(0, Math.min(100 - costPct, (result.platformFees / price) * 100));
+      profitPct = Math.max(0, 100 - costPct - feesPct);
+    }
+    document.getElementById("seg-cost").style.width = costPct.toFixed(1) + "%";
+    document.getElementById("seg-fees").style.width = feesPct.toFixed(1) + "%";
+    document.getElementById("seg-profit").style.width = profitPct.toFixed(1) + "%";
+
+    const whatifResult = document.getElementById("whatif-result");
+    if (increase > 0) {
+      const newResult = calcSellerProfit(price + increase, cost, ship, feePct, flatFee);
+      const profitDelta = newResult.netProfit - result.netProfit;
+      whatifResult.innerHTML = "Your profit would become <strong>" + formatMoney(newResult.netProfit, currentCountry) +
+        "</strong> (" + newResult.profitMargin.toFixed(1) + "% margin) — " +
+        (profitDelta >= 0 ? "up " : "down ") + formatMoney(Math.abs(profitDelta), currentCountry) + " per sale.";
+    } else {
+      whatifResult.textContent = "";
+    }
+  }
+
+  function applyPlatformDefaults(code) {
+    const p = PLATFORMS[code];
+    feePctEl.value = p.feePct;
+    flatFeeEl.value = p.flatFee;
+    feePctManualEl.value = p.feePct;
+    flatFeeManualEl.value = p.flatFee;
+  }
+
+  platformSelect.addEventListener("change", function () {
+    currentPlatform = platformSelect.value;
+    applyPlatformDefaults(currentPlatform);
+    render();
+  });
+
+  initCountrySelector(function (code) {
+    currentCountry = code;
+    render();
+  });
+
+  [priceEl, costEl, shipEl, feePctEl, flatFeeEl, priceIncreaseEl].forEach(function (el) {
+    el.addEventListener("input", render);
+  });
+
+  bindManualInput(priceEl, priceManualEl, render);
+  bindManualInput(costEl, costManualEl, render);
+  bindManualInput(shipEl, shipManualEl, render);
+  bindManualInput(feePctEl, feePctManualEl, render);
+  bindManualInput(flatFeeEl, flatFeeManualEl, render);
+  bindManualInput(priceIncreaseEl, priceIncreaseManualEl, render);
+
+  /* Print */
+  document.getElementById("btn-print").addEventListener("click", function () {
+    window.print();
+  });
+
+  /* Copy results */
+  document.getElementById("btn-copy").addEventListener("click", function () {
+    const text =
+      document.getElementById("receipt-headline").textContent + ": " + document.getElementById("receipt-amount").textContent + "\n" +
+      "Platform fees: " + document.getElementById("total-fees").textContent + "\n" +
+      "Profit margin: " + document.getElementById("profit-margin").textContent + "\n" +
+      "ROI: " + document.getElementById("roi").textContent;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(function () {
+        const btn = document.getElementById("btn-copy");
+        const original = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(function () { btn.textContent = original; }, 1500);
+      });
+    }
+  });
+
+  /* Share via WhatsApp */
+  document.getElementById("btn-whatsapp").addEventListener("click", function () {
+    const text =
+      "Seller profit estimate (via ClearSum):\n" +
+      document.getElementById("receipt-headline").textContent + ": " + document.getElementById("receipt-amount").textContent + "\n" +
+      "Profit margin: " + document.getElementById("profit-margin").textContent + "\n" +
+      "ROI: " + document.getElementById("roi").textContent + "\n" +
+      "https://shubham144144.github.io/Clear-sum/seller-profit-calculator.html";
+    shareViaWhatsApp(text);
+  });
+
+  /* Reset */
+  document.getElementById("btn-reset").addEventListener("click", function () {
+    platformSelect.value = "amazon";
+    currentPlatform = "amazon";
+    priceEl.value = 40;
+    costEl.value = 12;
+    shipEl.value = 4;
+    applyPlatformDefaults("amazon");
+    priceIncreaseEl.value = 0;
+
+    priceManualEl.value = 40;
+    costManualEl.value = 12;
+    shipManualEl.value = 4;
+    priceIncreaseManualEl.value = 0;
+
+    render();
+  });
+
+  /* Last updated date */
+  document.getElementById("last-updated-date").textContent = new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+
+  applyPlatformDefaults(currentPlatform);
+  render();
+  initReadingProgress();
+  initBackToTop();
+</script>
+
+</body>
+</html>
