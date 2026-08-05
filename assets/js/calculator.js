@@ -298,6 +298,21 @@ const PLATFORMS_BY_COUNTRY = {
     shopify: { label: "Shopify (own store)", feePct: 1.5, flatFee: 0.20 },
     other: { label: "Other / custom", feePct: 10, flatFee: 0 },
   },
+  IN: {
+    amazon: { label: "Amazon", feePct: 15, flatFee: 10 },
+    flipkart: { label: "Flipkart", feePct: 16, flatFee: 10 },
+    meesho: { label: "Meesho", feePct: 2, flatFee: 0 },
+    other: { label: "Other / custom", feePct: 10, flatFee: 0 },
+  },
+};
+
+/* Default field values per country, scaled to a realistic price range
+   for that market (India's currency has no small decimal fees in
+   practice, so its slider steps are whole rupees, not cents). */
+const SELLER_DEFAULTS_BY_COUNTRY = {
+  US: { sellingPrice: 40, productCost: 12, shippingCost: 4, priceMax: 300, costMax: 200, shipMax: 50, shipStep: 0.5, flatFeeMax: 3, flatFeeStep: 0.05 },
+  GB: { sellingPrice: 40, productCost: 12, shippingCost: 4, priceMax: 300, costMax: 200, shipMax: 50, shipStep: 0.5, flatFeeMax: 3, flatFeeStep: 0.05 },
+  IN: { sellingPrice: 599, productCost: 200, shippingCost: 40, priceMax: 3000, costMax: 2000, shipMax: 300, shipStep: 5, flatFeeMax: 50, flatFeeStep: 1 },
 };
 
 function calcSellerProfit(sellingPrice, productCost, shippingCost, feePct, flatFee) {
