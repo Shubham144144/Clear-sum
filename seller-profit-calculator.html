@@ -100,6 +100,7 @@
       <select id="country-select" aria-label="Select your country">
         <option value="US">United States</option>
         <option value="GB">United Kingdom</option>
+        <option value="IN">India</option>
       </select>
     </div>
   </div>
@@ -122,18 +123,15 @@
     <div class="wrap">
 
       <div class="input-card">
-        <div class="field">
+        <div class="field" id="platform-field">
           <label for="platform-select">
             <span>Selling platform</span>
           </label>
-          <select id="platform-select" aria-label="Select your selling platform">
-            <option value="amazon">Amazon</option>
-            <option value="ebay">eBay</option>
-            <option value="etsy">Etsy</option>
-            <option value="shopify">Shopify (own store)</option>
-            <option value="other">Other / custom</option>
-          </select>
+          <select id="platform-select" aria-label="Select your selling platform"></select>
         </div>
+        <p class="field-note" id="india-note" style="display: none; font-size: 13px; color: var(--ink-light); margin: -8px 0 20px;">
+          Marketplace-specific presets for Indian platforms (Meesho, Flipkart and others) are coming as a separate calculator. Enter your platform's fee manually below in the meantime.
+        </p>
 
         <div class="field">
           <label for="selling-price">
@@ -349,6 +347,8 @@
   let currentCountry = "US";
   let currentPlatform = "amazon";
 
+  const platformField = document.getElementById("platform-field");
+  const indiaNote = document.getElementById("india-note");
   const platformSelect = document.getElementById("platform-select");
   const priceEl = document.getElementById("selling-price");
   const costEl = document.getElementById("product-cost");
@@ -411,8 +411,37 @@
     }
   }
 
-  function applyPlatformDefaults(code) {
-    const p = PLATFORMS[code];
+  function buildPlatformOptions(countryCode) {
+    const platforms = PLATFORMS_BY_COUNTRY[countryCode];
+    if (!platforms) {
+      // No platform presets for this market (e.g. India) — hide the field,
+      // let the fee % / flat fee inputs be entered manually instead.
+      platformField.style.display = "none";
+      indiaNote.style.display = "block";
+      feePctEl.value = 10;
+      flatFeeEl.value = 0;
+      feePctManualEl.value = 10;
+      flatFeeManualEl.value = 0;
+      return;
+    }
+    platformField.style.display = "";
+    indiaNote.style.display = "none";
+    platformSelect.innerHTML = "";
+    Object.keys(platforms).forEach(function (code) {
+      const opt = document.createElement("option");
+      opt.value = code;
+      opt.textContent = platforms[code].label;
+      platformSelect.appendChild(opt);
+    });
+    currentPlatform = Object.keys(platforms)[0];
+    platformSelect.value = currentPlatform;
+    applyPlatformDefaults(currentCountry, currentPlatform);
+  }
+
+  function applyPlatformDefaults(countryCode, platformCode) {
+    const platforms = PLATFORMS_BY_COUNTRY[countryCode];
+    if (!platforms || !platforms[platformCode]) return;
+    const p = platforms[platformCode];
     feePctEl.value = p.feePct;
     flatFeeEl.value = p.flatFee;
     feePctManualEl.value = p.feePct;
@@ -421,12 +450,13 @@
 
   platformSelect.addEventListener("change", function () {
     currentPlatform = platformSelect.value;
-    applyPlatformDefaults(currentPlatform);
+    applyPlatformDefaults(currentCountry, currentPlatform);
     render();
   });
 
   initCountrySelector(function (code) {
     currentCountry = code;
+    buildPlatformOptions(currentCountry);
     render();
   });
 
@@ -476,12 +506,9 @@
 
   /* Reset */
   document.getElementById("btn-reset").addEventListener("click", function () {
-    platformSelect.value = "amazon";
-    currentPlatform = "amazon";
     priceEl.value = 40;
     costEl.value = 12;
     shipEl.value = 4;
-    applyPlatformDefaults("amazon");
     priceIncreaseEl.value = 0;
 
     priceManualEl.value = 40;
@@ -489,13 +516,13 @@
     shipManualEl.value = 4;
     priceIncreaseManualEl.value = 0;
 
+    buildPlatformOptions(currentCountry);
     render();
   });
 
   /* Last updated date */
   document.getElementById("last-updated-date").textContent = new Date().toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
 
-  applyPlatformDefaults(currentPlatform);
   render();
   initReadingProgress();
   initBackToTop();
