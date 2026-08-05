@@ -273,6 +273,31 @@ function generateAmortizationSchedule(principal, annualRatePct, years) {
 }
 
 /* ============================================
+   Seller profit — platform fee presets (US/UK)
+   Approximate 2026 headline rates for illustration;
+   real fees vary by category, account type and
+   fulfillment method, so every value is editable.
+   ============================================ */
+const PLATFORMS = {
+  amazon: { label: "Amazon", feePct: 15, flatFee: 0 },
+  ebay: { label: "eBay", feePct: 13, flatFee: 0.30 },
+  etsy: { label: "Etsy", feePct: 9.5, flatFee: 0.25 },
+  shopify: { label: "Shopify (own store)", feePct: 2.9, flatFee: 0.30 },
+  other: { label: "Other / custom", feePct: 10, flatFee: 0 },
+};
+
+function calcSellerProfit(sellingPrice, productCost, shippingCost, feePct, flatFee) {
+  const platformFees = sellingPrice * (feePct / 100) + flatFee;
+  const investedCost = productCost + shippingCost;
+  const totalCost = investedCost + platformFees;
+  const netProfit = sellingPrice - totalCost;
+  const profitMargin = sellingPrice > 0 ? (netProfit / sellingPrice) * 100 : 0;
+  const roi = investedCost > 0 ? (netProfit / investedCost) * 100 : 0;
+
+  return { platformFees, investedCost, totalCost, netProfit, profitMargin, roi };
+}
+
+/* ============================================
    Shared page UI: reading progress + back-to-top
    ============================================ */
 /* ============================================
