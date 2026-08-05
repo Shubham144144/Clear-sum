@@ -129,9 +129,6 @@
           </label>
           <select id="platform-select" aria-label="Select your selling platform"></select>
         </div>
-        <p class="field-note" id="india-note" style="display: none; font-size: 13px; color: var(--ink-light); margin: -8px 0 20px;">
-          Marketplace-specific presets for Indian platforms (Meesho, Flipkart and others) are coming as a separate calculator. Enter your platform's fee manually below in the meantime.
-        </p>
 
         <div class="field">
           <label for="selling-price">
@@ -348,7 +345,6 @@
   let currentPlatform = "amazon";
 
   const platformField = document.getElementById("platform-field");
-  const indiaNote = document.getElementById("india-note");
   const platformSelect = document.getElementById("platform-select");
   const priceEl = document.getElementById("selling-price");
   const costEl = document.getElementById("product-cost");
@@ -364,6 +360,14 @@
   const flatFeeManualEl = document.getElementById("flat-fee-manual");
   const priceIncreaseManualEl = document.getElementById("price-increase-manual");
 
+  function moneyPrecise(amount, countryCode) {
+    // formatMoney() rounds to whole currency units, which would hide a
+    // $0.25 flat fee as "$0" — show cents/pence here, whole rupees for India.
+    const c = COUNTRIES[countryCode];
+    const decimals = countryCode === "IN" ? 0 : 2;
+    return c.currency + amount.toFixed(decimals);
+  }
+
   function render() {
     const price = Number(priceEl.value);
     const cost = Number(costEl.value);
@@ -376,16 +380,16 @@
     document.getElementById("product-cost-display").textContent = formatMoney(cost, currentCountry);
     document.getElementById("shipping-cost-display").textContent = formatMoney(ship, currentCountry);
     document.getElementById("fee-pct-display").textContent = feePct.toFixed(1) + "%";
-    document.getElementById("flat-fee-display").textContent = formatMoney(flatFee, currentCountry);
+    document.getElementById("flat-fee-display").textContent = moneyPrecise(flatFee, currentCountry);
     document.getElementById("price-increase-display").textContent = formatMoney(increase, currentCountry);
 
     const result = calcSellerProfit(price, cost, ship, feePct, flatFee);
 
     document.getElementById("receipt-headline").textContent = result.netProfit < 0 ? "Net Loss Per Sale" : "Net Profit Per Sale";
-    document.getElementById("receipt-amount").textContent = formatMoney(result.netProfit, currentCountry);
+    document.getElementById("receipt-amount").textContent = moneyPrecise(result.netProfit, currentCountry);
     document.getElementById("receipt-amount").style.color = result.netProfit < 0 ? "#E8A499" : "var(--paper)";
 
-    document.getElementById("total-fees").textContent = formatMoney(result.platformFees, currentCountry);
+    document.getElementById("total-fees").textContent = moneyPrecise(result.platformFees, currentCountry);
     document.getElementById("profit-margin").textContent = result.profitMargin.toFixed(1) + "%";
     document.getElementById("roi").textContent = result.roi.toFixed(1) + "%";
 
@@ -403,29 +407,17 @@
     if (increase > 0) {
       const newResult = calcSellerProfit(price + increase, cost, ship, feePct, flatFee);
       const profitDelta = newResult.netProfit - result.netProfit;
-      whatifResult.innerHTML = "Your profit would become <strong>" + formatMoney(newResult.netProfit, currentCountry) +
+      whatifResult.innerHTML = "Your profit would become <strong>" + moneyPrecise(newResult.netProfit, currentCountry) +
         "</strong> (" + newResult.profitMargin.toFixed(1) + "% margin) — " +
-        (profitDelta >= 0 ? "up " : "down ") + formatMoney(Math.abs(profitDelta), currentCountry) + " per sale.";
+        (profitDelta >= 0 ? "up " : "down ") + moneyPrecise(Math.abs(profitDelta), currentCountry) + " per sale.";
     } else {
       whatifResult.textContent = "";
     }
   }
 
   function buildPlatformOptions(countryCode) {
-    const platforms = PLATFORMS_BY_COUNTRY[countryCode];
-    if (!platforms) {
-      // No platform presets for this market (e.g. India) — hide the field,
-      // let the fee % / flat fee inputs be entered manually instead.
-      platformField.style.display = "none";
-      indiaNote.style.display = "block";
-      feePctEl.value = 10;
-      flatFeeEl.value = 0;
-      feePctManualEl.value = 10;
-      flatFeeManualEl.value = 0;
-      return;
-    }
+    const platforms = PLATFORMS_BY_COUNTRY[countryCode] || PLATFORMS_BY_COUNTRY.US;
     platformField.style.display = "";
-    indiaNote.style.display = "none";
     platformSelect.innerHTML = "";
     Object.keys(platforms).forEach(function (code) {
       const opt = document.createElement("option");
@@ -435,7 +427,17 @@
     });
     currentPlatform = Object.keys(platforms)[0];
     platformSelect.value = currentPlatform;
-    applyPlatformDefaults(currentCountry, currentPlatform);
+    applyPlatformDefaults(countryCode, currentPlatform);
+  }
+
+  function applyCountryRanges(countryCode) {
+    const d = SELLER_DEFAULTS_BY_COUNTRY[countryCode] || SELLER_DEFAULTS_BY_COUNTRY.US;
+
+    priceEl.max = d.priceMax; priceEl.value = d.sellingPrice; priceManualEl.value = d.sellingPrice;
+    costEl.max = d.costMax; costEl.value = d.productCost; costManualEl.value = d.productCost;
+    shipEl.max = d.shipMax; shipEl.step = d.shipStep; shipEl.value = d.shippingCost; shipManualEl.value = d.shippingCost; shipManualEl.step = d.shipStep;
+    flatFeeEl.max = d.flatFeeMax; flatFeeEl.step = d.flatFeeStep; flatFeeManualEl.step = d.flatFeeStep;
+    priceIncreaseEl.max = Math.round(d.priceMax / 6); priceIncreaseEl.value = 0; priceIncreaseManualEl.value = 0;
   }
 
   function applyPlatformDefaults(countryCode, platformCode) {
@@ -456,6 +458,7 @@
 
   initCountrySelector(function (code) {
     currentCountry = code;
+    applyCountryRanges(currentCountry);
     buildPlatformOptions(currentCountry);
     render();
   });
@@ -506,16 +509,7 @@
 
   /* Reset */
   document.getElementById("btn-reset").addEventListener("click", function () {
-    priceEl.value = 40;
-    costEl.value = 12;
-    shipEl.value = 4;
-    priceIncreaseEl.value = 0;
-
-    priceManualEl.value = 40;
-    costManualEl.value = 12;
-    shipManualEl.value = 4;
-    priceIncreaseManualEl.value = 0;
-
+    applyCountryRanges(currentCountry);
     buildPlatformOptions(currentCountry);
     render();
   });
