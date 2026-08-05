@@ -273,17 +273,31 @@ function generateAmortizationSchedule(principal, annualRatePct, years) {
 }
 
 /* ============================================
-   Seller profit — platform fee presets (US/UK)
+   Seller profit — platform fee presets, per country.
+   Only platforms with a real presence in that market
+   are listed (e.g. no eBay/Etsy under India — those
+   don't operate there in any meaningful way).
    Approximate 2026 headline rates for illustration;
    real fees vary by category, account type and
    fulfillment method, so every value is editable.
    ============================================ */
-const PLATFORMS = {
-  amazon: { label: "Amazon", feePct: 15, flatFee: 0 },
-  ebay: { label: "eBay", feePct: 13, flatFee: 0.30 },
-  etsy: { label: "Etsy", feePct: 9.5, flatFee: 0.25 },
-  shopify: { label: "Shopify (own store)", feePct: 2.9, flatFee: 0.30 },
-  other: { label: "Other / custom", feePct: 10, flatFee: 0 },
+const PLATFORMS_BY_COUNTRY = {
+  US: {
+    amazon: { label: "Amazon", feePct: 15, flatFee: 0 },
+    ebay: { label: "eBay", feePct: 13, flatFee: 0.30 },
+    etsy: { label: "Etsy", feePct: 9.5, flatFee: 0.25 },
+    walmart: { label: "Walmart Marketplace", feePct: 15, flatFee: 0 },
+    shopify: { label: "Shopify (own store)", feePct: 2.9, flatFee: 0.30 },
+    other: { label: "Other / custom", feePct: 10, flatFee: 0 },
+  },
+  GB: {
+    amazon: { label: "Amazon", feePct: 15, flatFee: 0 },
+    ebay: { label: "eBay", feePct: 12, flatFee: 0 },
+    etsy: { label: "Etsy", feePct: 10.5, flatFee: 0.20 },
+    notonthehighstreet: { label: "Not On The High Street", feePct: 25, flatFee: 0 },
+    shopify: { label: "Shopify (own store)", feePct: 1.5, flatFee: 0.20 },
+    other: { label: "Other / custom", feePct: 10, flatFee: 0 },
+  },
 };
 
 function calcSellerProfit(sellingPrice, productCost, shippingCost, feePct, flatFee) {
